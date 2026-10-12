@@ -16,7 +16,33 @@
 
 **必须区分：** L1 自动通过不等于 L2–L5 通过；直接要求 Agent 打开 `SKILL.md`，也不能单独证明它能**自动发现**该 Skill。
 
-## 1. 准备独立测试项目
+## 快速准备：Windows PowerShell（推荐）
+
+现在可以使用 [验收项目准备脚本](../scripts/prepare_agent_acceptance.py) 一次准备好**独立、可丢弃**的测试工作区。脚本使用 Python 3.10+ 标准库，默认 Dry-run，不启动任何 AI 客户端，也不会更改已经存在的目录。
+
+在 Agent Engineering Kit **仓库根目录**运行：
+
+```powershell
+# 预览 Codex 的测试环境，不修改文件
+python scripts/prepare_agent_acceptance.py --agent codex --output ..\aek-e2e-codex
+
+# 确认后生成项目副本、中文 Prompt、git-commit Skill 及验收清单
+python scripts/prepare_agent_acceptance.py --agent codex --output ..\aek-e2e-codex --apply
+
+# 查看准备结果并进入可丢弃项目
+Get-Content ..\aek-e2e-codex\ACCEPTANCE_MANIFEST.json
+cd ..\aek-e2e-codex
+codex --version
+codex
+```
+
+另两款工具使用 `--agent opencode --output ..\aek-e2e-opencode` 和 `--agent claude-code --output ..\aek-e2e-claude` 分别执行预览及 `--apply`，**不要共用目标目录**。
+
+生成的 `ACCEPTANCE_CHECKLIST.md` 记录测试步骤，`ACCEPTANCE_MANIFEST.json` 记录已核对的文件、源代码 SHA-256 和状态：**L1 为 passed、L2–L5 为 not_tested**。实际验收前不得把这些状态改成通过。已有目标目录会被拒绝覆盖，脚本失败时只清理本次创建的新目录。
+
+脚本不安装 Codex/OpenCode/Claude Code，不登录、不创建 API 密钥、不自动调用模型；真实客户端是否能发现和调用 Skill，仍需你在自己的 Windows 环境执行以下步骤确认。
+
+## 1. 准备独立测试项目（手动方式）
 
 从工具包根目录复制 [已有 Python 示例](../examples/existing-python/README.md) 到工具包**外部**的新目录。Windows PowerShell 示例：
 

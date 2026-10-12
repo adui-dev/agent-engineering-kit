@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 INSTALLER = ROOT / "scripts" / "init.py"
 VERIFIER = ROOT / "scripts" / "verify_installation.py"
+PREPARER = ROOT / "scripts" / "prepare_agent_acceptance.py"
 
 
 def run_cli(*args: str, expected: int = 0) -> str:
@@ -132,6 +133,45 @@ def main() -> int:
                 target / ".agents/skills/git-commit/SKILL.md",
             )
             verify_files(target, agent=agent, skills=("git-commit",))
+
+        # Disposable client workspaces: CLI dry-run, install and honest evidence.
+        for agent in ("codex", "opencode", "claude-code"):
+            target = temp / f"acceptance-{agent}"
+            arguments = [
+                sys.executable, str(PREPARER),
+                "--agent", agent, "--output", str(target), "--lang", "zh-CN",
+            ]
+            environment = os.environ.copy()
+            environment["PYTHONUTF8"] = "1"
+            environment["PYTHONIOENCODING"] = "utf-8"
+            preview = subprocess.run(
+                arguments, cwd=ROOT, capture_output=True, text=True,
+                encoding="utf-8", errors="replace", check=False, env=environment,
+            )
+            if preview.returncode != 0 or target.exists():
+                raise AssertionError(f"Acceptance dry-run failed for {agent}: {preview.stderr}")
+            prepared = subprocess.run(
+                arguments + ["--apply"], cwd=ROOT, capture_output=True,
+                text=True, encoding="utf-8", errors="replace", check=False, env=environment,
+            )
+            if prepared.returncode != 0:
+                raise AssertionError(f"Acceptance preparation failed for {agent}: {prepared.stderr}")
+            report = json.loads(
+                (target / "ACCEPTANCE_MANIFEST.json").read_text(encoding="utf-8")
+            )
+            if report["L1"] != "passed" or any(
+                report[level] != "not_tested" for level in ("L2", "L3", "L4", "L5")
+            ):
+                raise AssertionError(f"Acceptance states are inaccurate for {agent}")
+            expected = ROOT / "examples/existing-python/src/app.py"
+            assert_copied(expected, target / "src/app.py")
+            verify_files(target, agent=agent, skills=("git-commit",))
+            rejected = subprocess.run(
+                arguments + ["--apply"], cwd=ROOT, capture_output=True,
+                text=True, encoding="utf-8", errors="replace", check=False, env=environment,
+            )
+            if rejected.returncode == 0:
+                raise AssertionError("Acceptance preparation unexpectedly overwrote an existing workspace")
 
         # Existing project: unchanged application behavior and failure-on-conflict.
         existing = temp / "existing-python"

@@ -23,6 +23,10 @@ bash scripts/smoke_init.sh
 
 Python Smoke Test 跨平台运行真实 CLI 子进程，在临时目录中验证：dry-run 不写入文件、三类 Agent 目录适配、Prompt 内容完整、第三方许可及引用资料被保留、已有 Python 项目测试仍通过、重复安装被阻止。Bash 版本额外覆盖 Linux 场景。
 
+## 实际客户端验收准备
+
+可用 [准备工具](../scripts/prepare_agent_acceptance.py) 基于已有 Python 示例创建仓库外的临时测试项目，生成源代码哈希基线与未测试状态清单；不会调用 Agent。具体步骤见 [端到端验收](AGENT_ACCEPTANCE.md)。
+
 ## Agent 实际初始化的人工验收
 
 自动脚本**不会模拟或假称已成功调用 AI Agent**。在实际工具中用 Prompt 初始化一个示例项目后，请核对：

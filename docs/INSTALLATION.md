@@ -87,6 +87,10 @@ my-project/
 
 **注意：** 该工具只负责文件复制。安装之后，需要在目标项目的 AI 编程工具中**明确要求 Agent 阅读** `.agents/prompts/project-initialization.md` 并开始项目审查；目标工具是否会自动加载 Skills 必须另行验证。
 
+## 真实客户端验收项目准备
+
+如果要在 Codex、OpenCode 或 Claude Code 中实际测试技能发现与项目初始化，可以使用 [prepare_agent_acceptance.py](../scripts/prepare_agent_acceptance.py) 快速生成独立测试项目。它是独立于通用初始化 CLI 的**测试环境准备工具**，默认预览，不覆盖目录，不自动调用任何客户端；示例命令与验收等级见 [端到端验收](AGENT_ACCEPTANCE.md)。
+
 ## Windows 原生安装验收
 
 无需 Git Bash 或 WSL，Windows PowerShell 可以直接执行跨平台 Smoke Test：
