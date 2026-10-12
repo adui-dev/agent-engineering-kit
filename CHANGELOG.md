@@ -2,6 +2,11 @@
 
 本仓库采用 **V主版本.次版本** 的公开版本标识，版本来源为根目录 [VERSION](VERSION)。不自动将文档版本视为 Git Tag 或 GitHub Release。
 
+## 未发布（Unreleased）
+
+- 🌐 完善项目介绍、快速使用、Skills 导航及质量检查说明，新增与中文版互链的英文 README。
+- ✅ 将英文 README 纳入版本一致性与相对链接校验，并补充相关单元测试。
+
 ## V1.0 — 首个正式版本（2026-10-12）
 
 **发布说明：** [V1.0](docs/releases/V1.0.md) · **Git Tag：** `v1.0.0`

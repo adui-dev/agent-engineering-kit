@@ -32,6 +32,13 @@ Skill 的标准流程（审查 diff → 按逻辑暂存 → 选择类型与范�
 
 项目同时收录 [conventional-commit](.agents/skills/conventional-commit/SKILL.md)，用于规范提交消息。两项 Skill 的通用英文示例仅供参考：**本仓库统一采用 `type(scope): emoji 中文描述`**。无论 Skills 如何描述执行流程，实际 Git 提交和推送均需要获得用户授权。
 
+## 中英文文档维护
+
+- [README.md](README.md) 是默认中文版，[README.en.md](README.en.md) 为英文版。两个入口必须相互链接。
+- 项目介绍、主要能力、使用步骤、版本与许可证说明变动时，同步更新两份 README，不添加未实现的英文初始化 Prompt。
+- 仓库中的项目规范和上游 Skills 保持各自原有语言；英文版 README 应准确指向真实存在的文件，不应虚构英文版规范。
+- 修改后运行项目文档验证和单元测试。
+
 ## 正式发布
 
 首次版本与后续发布操作请遵循 [发布规范](docs/RELEASING.md)，发布前先审查代码和 Release Notes；版本 Tag 不得强制覆盖。

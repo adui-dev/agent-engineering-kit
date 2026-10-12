@@ -12,6 +12,7 @@ from urllib.parse import unquote, urlsplit
 REQUIRED_FILES = (
     "VERSION",
     "README.md",
+    "README.en.md",
     "AGENTS.md",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
@@ -60,6 +61,7 @@ def check_repository(root: Path) -> list[str]:
 
     checks = {
         "README.md": version,
+        "README.en.md": version,
         "AGENTS.md": version,
         "CHANGELOG.md": version,
         "prompts/project-initialization.zh-CN.md": f"版本：{version}",

@@ -11,7 +11,7 @@
 ## 发布前检查
 
 1. 确认 Prompt、Skills、许可证及对外文档一致。
-2. 确认 `VERSION`、README、AGENTS、CHANGELOG 使用同一版本。
+2. 确认 `VERSION`、中英文 README、AGENTS、CHANGELOG 使用同一版本，且两份 README 的发布及功能描述同步。
 3. 为本版本创建 `docs/releases/V主版本.次版本.md`，仅包含对外功能、用法和已知限制，不加入内部运维信息。
 4. 在仓库根目录运行：
 

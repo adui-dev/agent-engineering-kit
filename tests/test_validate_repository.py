@@ -19,7 +19,8 @@ class RepositoryValidatorTests(unittest.TestCase):
             file.parent.mkdir(parents=True, exist_ok=True)
             file.write_text("# 示例\n", encoding="utf-8")
         (self.root / "VERSION").write_text("V1.0\n", encoding="utf-8")
-        (self.root / "README.md").write_text("# V1.0\n[指南](docs/QUALITY.md)\n", encoding="utf-8")
+        (self.root / "README.md").write_text("# V1.0\n[English](README.en.md)\n[指南](docs/QUALITY.md)\n", encoding="utf-8")
+        (self.root / "README.en.md").write_text("# V1.0\n[简体中文](README.md)\n", encoding="utf-8")
         (self.root / "AGENTS.md").write_text("# V1.0\n", encoding="utf-8")
         (self.root / "CHANGELOG.md").write_text("# V1.0\n", encoding="utf-8")
         (self.root / "prompts/project-initialization.zh-CN.md").write_text("版本：V1.0\n", encoding="utf-8")
@@ -35,6 +36,18 @@ class RepositoryValidatorTests(unittest.TestCase):
     def test_broken_relative_link(self):
         (self.root / "README.md").write_text("# V1.0\n[失效](docs/missing.md)\n", encoding="utf-8")
         self.assertTrue(any("无效文件链接" in e for e in check_repository(self.root)))
+
+    def test_missing_english_readme(self):
+        (self.root / "README.en.md").unlink()
+        self.assertTrue(any("README.en.md" in e for e in check_repository(self.root)))
+
+    def test_english_readme_version_mismatch(self):
+        (self.root / "README.en.md").write_text("# V1.1\n[简体中文](README.md)\n", encoding="utf-8")
+        self.assertTrue(any("README.en.md 未体现当前版本 V1.0" in e for e in check_repository(self.root)))
+
+    def test_english_readme_invalid_link(self):
+        (self.root / "README.en.md").write_text("# V1.0\n[missing](missing-file.md)\n", encoding="utf-8")
+        self.assertTrue(any("README.en.md" in e and "无效文件链接" in e for e in check_repository(self.root)))
 
     def test_version_mismatch(self):
         (self.root / "prompts/project-initialization.zh-CN.md").write_text("版本：V2.0\n", encoding="utf-8")

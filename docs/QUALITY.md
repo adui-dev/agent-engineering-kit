@@ -20,12 +20,16 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 | 检查 | 范围 |
 | --- | --- |
 | 核心文件 | VERSION、Prompt、README、AGENTS、CHANGELOG、Skills 索引和质量检查工作流等 |
-| 版本 | README、AGENTS、CHANGELOG、Prompt 与 VERSION 一致 |
-| 本地链接 | 一方 Markdown 文件和各 Skill 主入口 SKILL.md 中的相对路径；排除外部地址和围栏代码示例 |
+| 版本 | 中英文 README、AGENTS、CHANGELOG、Prompt 与 VERSION 一致 |
+| 本地链接 | 根目录 Markdown（包含中英文 README）、docs、prompts 和 Skill 主入口 SKILL.md 的相对路径；排除外部地址和围栏代码示例 |
 | Skills | 检查 `SKILL.md` frontmatter 的 name、description、目录名与索引、第三方许可文件 |
 | 测试 | unittest 覆盖正常流程、错误链接、版本不一致、元数据错误及许可缺失 |
 
 **不自动覆盖**：Markdown 锚点、外部网址可用性、第三方所有 reference 文件的语义校验、业务逻辑、实际 Actions 安全审计或运行效果。
+
+## 双语文档约定
+
+[中文 README](../README.md) 为 GitHub 默认入口，[English README](../README.en.md) 提供英文介绍。两份 README 应互相链接，并保证版本、功能范围和使用说明一致。校验脚本检查英文 README 是否存在、版本标识及相对链接；**内容的语义对齐仍需人工审查**。完整的项目初始化 Prompt 当前只维护简体中文版。
 
 ## GitHub Actions
 

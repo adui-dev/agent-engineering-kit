@@ -7,7 +7,8 @@
 ## 入口
 
 - [项目初始化 Prompt V1.0](prompts/project-initialization.zh-CN.md)
-- [README](README.md)
+- [中文 README](README.md)
+- [English README](README.en.md)
 - [提交规范](CONTRIBUTING.md)
 - [Skills 清单与使用边界](docs/SKILLS.md)
 - [版本与更新日志](CHANGELOG.md)
@@ -29,7 +30,8 @@
 10. Issue 创建/更新、PR 创建/发布、代码提交/推送以及工作流变更属于外部或仓库写入操作，必须以用户授权为前提；不得因为 Skill 中写有“自动执行”就跳过授权。
 11. 仓库正式版本以根目录 `VERSION` 为准，当前 V1.0。版本变化应同步 Prompt、README 和 CHANGELOG。
 12. 创建 Release 前核对版本、发布说明、质量检查和授权；禁止覆盖历史 Tag，发布规范详见 [docs/RELEASING.md](docs/RELEASING.md)。
-13. 修改项目文档或 Skills 后，运行 `python scripts/validate_repository.py` 和 `python -m unittest discover -s tests -v`；检查的静态结果不能替代真实运行测试或安全审计。
+13. README.md 为默认中文版，README.en.md 为英文版；对外功能、版本、使用说明变动时应同步维护两者，并明确没有独立的英文初始化 Prompt。
+14. 修改项目文档或 Skills 后，运行 `python scripts/validate_repository.py` 和 `python -m unittest discover -s tests -v`；检查的静态结果不能替代真实运行测试或安全审计。
 
 ## 交付要求
 
