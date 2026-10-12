@@ -46,6 +46,20 @@ Agent 应先检查目标仓库，再根据真实需求创建或补全必要文�
 
 **重要：** 目标工具必须具备相应的文件读写和执行权限；不能执行时应如实说明。完整流程由目标项目自行维护，不要求将本仓库整体复制进去。
 
+## 🧰 可选：命令行安全初始化
+
+如果希望在目标项目中保存 Prompt 或安装指定 Skills，可使用无外部依赖的 Python 初始化工具（Python 3.10+）：
+
+```powershell
+# 预览（默认不写入）
+python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit
+
+# 确认无冲突后应用
+python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit --apply
+```
+
+脚本只负责复制选定的 Prompt 与 Skills，**不自动生成项目文档、执行 Skill 或覆盖已有文件**。详见 [安装使用说明](docs/INSTALLATION.md)、[可运行示例与验收](docs/EXAMPLES.md)。
+
 ## 🧭 八大核心工程资产
 
 | 资产 | 解决的问题 |
@@ -92,6 +106,10 @@ Skills 存放在 `.agents/skills/`。**能否自动发现由所用 AI 编程工�
 | [AGENTS.md](AGENTS.md) | 本仓库的 Agent 协作规则 |
 | [Skills 索引](docs/SKILLS.md) | 技能使用方式、来源与维护约定 |
 | [质量检查说明](docs/QUALITY.md) | 本地验证、CI 和检查边界 |
+| [CLI 安装说明](docs/INSTALLATION.md) | 安全预览、选择语言与 Skills、拒绝覆盖 |
+| [示例与验收](docs/EXAMPLES.md) | 空仓库与已有 Python 项目示例、自动验证 |
+| [工具兼容性](docs/COMPATIBILITY.md) | Codex、OpenCode、Claude Code 的待验证项 |
+| [安全政策](SECURITY.md) | 私密漏洞报告和供应链风险说明 |
 | [贡献指南](CONTRIBUTING.md) | 中文、Emoji 和 Conventional Commits 规范 |
 | [发布说明](docs/RELEASING.md) | 版本管理、发布检查与 Release 工作流程 |
 | [更新日志](CHANGELOG.md) | 已发布版本与后续未发布变更 |

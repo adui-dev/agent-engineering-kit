@@ -19,11 +19,11 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 | 检查 | 范围 |
 | --- | --- |
-| 核心文件 | VERSION、中文与英文 Prompt、两份 README、AGENTS、CHANGELOG、Skills 索引和质量检查工作流等 |
+| 核心文件 | VERSION、双语 Prompt/README、AGENTS、CHANGELOG、Skills 索引、初始化 CLI 和质量检查工作流等 |
 | 版本 | 两份 README、中英文 Prompt、AGENTS、CHANGELOG 与 VERSION 一致 |
 | 本地链接 | 根目录 Markdown（包含中英文 README）、docs、prompts 和 Skill 主入口 SKILL.md 的相对路径；排除外部地址和围栏代码示例 |
 | Skills | 检查 `SKILL.md` frontmatter 的 name、description、目录名与索引、第三方许可文件 |
-| 测试 | unittest 覆盖正常流程、错误链接、版本不一致、元数据错误及许可缺失 |
+| 测试 | unittest 覆盖仓库结构及 CLI 的预览、冲突、符号链接、回滚等安全路径；Smoke Test 验证真实文件复制和已有项目回归 |
 
 **不自动覆盖**：Markdown 锚点、外部网址可用性、第三方所有 reference 文件的语义校验、业务逻辑、实际 Actions 安全审计或运行效果。
 
@@ -31,11 +31,26 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 [中文 README](../README.md) 为 GitHub 默认入口，[English README](../README.en.md) 提供英文介绍。两份 README 应互相链接，并保证版本、功能范围和使用说明一致。校验脚本检查英文 README 是否存在、版本标识及相对链接；**内容的语义对齐仍需人工审查**。完整项目初始化 Prompt 同时维护 [中文](../prompts/project-initialization.zh-CN.md) 和 [英文](../prompts/project-initialization.en.md) 两个版本。校验会核对两版版本号与主章节、八类资产对应的子章节；**自动结构校验不能代替翻译语义审查**。
 
+## 安全初始化与使用验收
+
+安装命令和覆盖防护见 [安装说明](INSTALLATION.md)；空项目、可执行的既有代码示例及验收边界见 [示例与验收](EXAMPLES.md)。自动脚本仅验证复制/现有项目测试，不能宣称已经实际运行 AI Agent。
+
 ## GitHub Actions
 
 [质量检查工作流](../.github/workflows/quality.yml) 在 `main` 推送、针对 `main` 的 PR 和手动启动时运行。只有 `contents: read` 权限。
 
 如需通过强制质量检查才能合并，需要由仓库管理员在 Branch Ruleset 中配置必需检查。
+
+质量检查会执行：
+
+```bash
+python3 scripts/validate_repository.py
+python3 -m unittest discover -s tests -v
+python3 -m unittest discover -s examples/existing-python/tests -v
+bash scripts/smoke_init.sh
+```
+
+其中 `bash` 检查用于 Linux CI 或 Bash 环境；Windows 可运行 Python 部分。
 
 ## 版本发布检查
 

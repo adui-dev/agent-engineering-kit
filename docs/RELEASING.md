@@ -21,12 +21,12 @@
    python -m unittest discover -s tests -v
    ```
 
-5. 审核变更并确认 GitHub Actions 质量检查通过。
+5. 审核变更并确认 GitHub Actions 质量检查通过，再由维护者在 `main` 上手动运行发布工作流。
 6. 发布需要维护者明确授权；不得强制覆盖已有 Tag。
 
-## 自动发布
+## 手动发布
 
-[正式发布工作流](../.github/workflows/publish-release.yml) 在 GitHub `main` 分支的 `VERSION` 或 `docs/releases/**` 变更后运行，也支持手动触发。
+[正式发布工作流](../.github/workflows/publish-release.yml) **仅支持 GitHub Actions 手动启动（workflow_dispatch）**，并且只允许从 `main` 分支执行发布阶段。普通 Push 或修改 VERSION/Release Notes **不会自动创建 Git Tag 或 Release**。
 
 发布过程包含只读校验阶段和拥有最小写权限（`contents: write`）的 Release 阶段：
 
@@ -36,7 +36,7 @@
 4. 如果 Tag 已存在但尚无 Release，则停止，要求人工核对。
 5. 使用当次 `main` Commit 创建对应 Tag 与正式 Release，不发布为预发布或草稿。
 
-**维护权限提示：** 向 `main` 推送符合条件的发布文件会触发自动发布。建议为正式项目设置分支保护，确保发布文件变更经过审核。GitHub 会自动生成源码 ZIP/TAR 快照。
+**维护权限提示：** 发布由维护者明确发起。建议在 GitHub Settings → Rules → Rulesets 中配置 `main` 分支保护、必需的质量检查和 PR 审批。这项仓库设置需要管理员在 GitHub 中启用；仅增加文档并不会自动配置保护规则。GitHub 会自动生成源码 ZIP/TAR 快照。
 
 ## 发布后核对
 

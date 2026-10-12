@@ -2,6 +2,14 @@
 
 本仓库采用 **V主版本.次版本** 的公开版本标识，版本来源为根目录 [VERSION](VERSION)。不自动将文档版本视为 Git Tag 或 GitHub Release。
 
+## 未发布（Unreleased）
+
+- 🧰 新增 Python 标准库初始化 CLI：默认预览、按需选择语言和 Skills、冲突拒绝及失败回滚。
+- 🧪 增加空项目与已有 Python 项目的使用示例、CLI 单元测试与 Smoke Test，并接入 CI。
+- 🔐 增加安全政策、Issue/PR 模板与 CODEOWNERS，准备更规范的开源协作。
+- 🛡️ 将正式发布改为显式手动触发，避免版本文件的普通提交自动创建 Release。
+- 🔗 修正 V1.1 发布说明中在 Release 页面无法正确跳转的相对链接，并增加兼容性与安装说明。
+
 ## V1.1 — 双语文档与英文初始化 Prompt（2026-10-12）
 
 **发布说明：** [V1.1](docs/releases/V1.1.md) · **Git Tag：** `v1.1.0`

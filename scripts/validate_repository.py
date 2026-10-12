@@ -19,6 +19,23 @@ REQUIRED_FILES = (
     "LICENSE",
     "prompts/project-initialization.zh-CN.md",
     "prompts/project-initialization.en.md",
+    "SECURITY.md",
+    "docs/INSTALLATION.md",
+    "docs/EXAMPLES.md",
+    "docs/COMPATIBILITY.md",
+    "scripts/init.py",
+    "scripts/smoke_init.sh",
+    "tests/test_init.py",
+    "examples/greenfield/README.md",
+    "examples/existing-python/README.md",
+    "examples/existing-python/src/app.py",
+    "examples/existing-python/tests/test_app.py",
+    ".github/workflows/publish-release.yml",
+    ".github/ISSUE_TEMPLATE/bug_report.yml",
+    ".github/ISSUE_TEMPLATE/feature_request.yml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/pull_request_template.md",
+    ".github/CODEOWNERS",
     "docs/SKILLS.md",
     "docs/QUALITY.md",
     ".github/workflows/quality.yml",
@@ -127,8 +144,9 @@ def check_repository(root: Path) -> list[str]:
         if f".agents/skills/{folder.name}/SKILL.md" not in indexed:
             errors.append(f"Skills 索引缺少：{folder.name}")
 
-    markdown_files = sorted(root.glob("*.md")) + sorted((root / "docs").glob("*.md"))
+    markdown_files = sorted(root.glob("*.md")) + sorted((root / "docs").rglob("*.md"))
     markdown_files += sorted((root / "prompts").glob("*.md"))
+    markdown_files += sorted((root / "examples").rglob("*.md"))
     markdown_files += [folder / "SKILL.md" for folder in skills if (folder / "SKILL.md").is_file()]
     for file in markdown_files:
         for url in markdown_targets(file.read_text(encoding="utf-8")):

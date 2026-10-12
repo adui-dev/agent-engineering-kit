@@ -46,6 +46,20 @@ You can append the following instruction:
 
 **Important:** The coding tool needs the necessary filesystem and execution permissions. If an operation cannot be performed, it must be reported rather than presented as completed. The initialized engineering assets belong in the **target repository**.
 
+## 🧰 Optional: safe CLI setup
+
+To copy a selected prompt and optional Skills into an existing project, use the dependency-free Python 3.10+ installer:
+
+```bash
+# Preview only (the default, writes nothing)
+python scripts/init.py --target ../my-project --lang en --skill git-commit
+
+# Explicitly apply after reviewing the file list
+python scripts/init.py --target ../my-project --lang en --skill git-commit --apply
+```
+
+The CLI **does not generate project-specific requirements, run third-party Skills, or overwrite existing files**. See the [installation guide](docs/INSTALLATION.md) and [runnable examples](docs/EXAMPLES.md) (documentation currently in Chinese).
+
 ## 🧭 Eight core engineering assets
 
 | Asset | Responsibility |
@@ -92,6 +106,10 @@ Skills are stored under `.agents/skills/`. **Automatic discovery depends on your
 | [AGENTS.md](AGENTS.md) | Rules for agents working on this toolkit (Chinese) |
 | [Skills index](docs/SKILLS.md) | Skill sources, usage, and maintenance (Chinese) |
 | [Quality checks](docs/QUALITY.md) | Local checks, CI, and validation scope (Chinese) |
+| [CLI installation](docs/INSTALLATION.md) | Dry-run, languages, Skills, and collision-safe copying (Chinese) |
+| [Examples and acceptance](docs/EXAMPLES.md) | Greenfield and runnable existing-project samples (Chinese) |
+| [Agent compatibility](docs/COMPATIBILITY.md) | Codex, OpenCode, and Claude Code validation status (Chinese) |
+| [Security policy](SECURITY.md) | Private vulnerability reporting and supply-chain guidance |
 | [Contributing guide](CONTRIBUTING.md) | Emoji and Chinese Conventional Commits (Chinese) |
 | [Release guide](docs/RELEASING.md) | Versioning and release process (Chinese) |
 | [Changelog](CHANGELOG.md) | Released versions and unreleased changes (Chinese) |

@@ -1,12 +1,6 @@
 name: "🚀 发布正式版本"
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - VERSION
-      - "docs/releases/**"
   workflow_dispatch:
 
 permissions:

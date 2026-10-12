@@ -32,3 +32,9 @@ jobs:
 
       - name: "🧪 运行校验脚本单元测试"
         run: python3 -m unittest discover -s tests -v
+
+      - name: "🐍 验证已有示例项目"
+        run: python3 -m unittest discover -s examples/existing-python/tests -v
+
+      - name: "🚦 运行初始化 Smoke Test"
+        run: bash scripts/smoke_init.sh
