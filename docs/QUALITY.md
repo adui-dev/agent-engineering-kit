@@ -19,7 +19,7 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 | 检查 | 范围 |
 | --- | --- |
-| 核心文件 | VERSION、Prompt、README、AGENTS、CHANGELOG、Skills 索引和两个 Actions 工作流等 |
+| 核心文件 | VERSION、Prompt、README、AGENTS、CHANGELOG、Skills 索引和质量检查工作流等 |
 | 版本 | README、AGENTS、CHANGELOG、Prompt 与 VERSION 一致 |
 | 本地链接 | 一方 Markdown 文件和各 Skill 主入口 SKILL.md 中的相对路径；排除外部地址和围栏代码示例 |
 | Skills | 检查 `SKILL.md` frontmatter 的 name、description、目录名与索引、第三方许可文件 |
@@ -29,9 +29,9 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 ## GitHub Actions
 
-[质量检查工作流](../.github/workflows/quality.yml) 在 `main` 推送、针对 `main` 的 PR 和手动启动时运行。只有 `contents: read` 权限，不读取或传递 `CNB_TOKEN`。
+[质量检查工作流](../.github/workflows/quality.yml) 在 `main` 推送、针对 `main` 的 PR 和手动启动时运行。只有 `contents: read` 权限。
 
-[CNB 同步工作流](../.github/workflows/sync-cnb.yml) 独立执行；质量检查不会阻断同步。若希望通过强制通过检查才能合并，需要由仓库管理员在 Branch Ruleset 中配置必需检查。
+如需通过强制质量检查才能合并，需要由仓库管理员在 Branch Ruleset 中配置必需检查。
 
 ## 提交前检查
 

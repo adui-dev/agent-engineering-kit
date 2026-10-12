@@ -7,7 +7,6 @@
 - 🧭 提供跨技术栈工程初始化 Prompt，覆盖 AGENTS、REQUIREMENTS、SDD、ARCHITECTURE、PROJECT_CONTEXT、CODEBASE_MAP、Skills 与 Harness。
 - 🧩 收录 8 项 Git/GitHub/Actions Skills，保留第三方上游版本与 MIT 许可。
 - 📝 提供中文 + Emoji Conventional Commits 协作规则。
-- 🔄 配置 GitHub `main` 向 CNB `main` 安全单向同步。
 - ✅ 增加依赖 Python 标准库的文档与 Skills 校验脚本、单元测试及质量检查 CI。
 - 📚 完善快速使用、版本约定及质量检查说明。
 
@@ -15,7 +14,6 @@
 
 - 初始化 Prompt 必须在目标工作区由具有访问权限的 Agent 执行，单独复制 Prompt 不会自动修改仓库。
 - Skills 是否被自动发现及支持的外部操作，取决于具体 AI 编程工具和连接权限。
-- CNB 同步仅针对 `main` 分支，不执行强制推送，不自动同步其他分支或 Tags。
 - 静态校验不等同于业务测试、全面语义一致性或安全审计。
 
 ## 更新约定

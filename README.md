@@ -1,6 +1,6 @@
 # 🚀 Agent Engineering Kit
 
-**当前版本：V1.0（首个正式版本）** · [更新日志](CHANGELOG.md) · [CNB 镜像](https://cnb.cool/adui-studio/agent-engineering-kit)
+**当前版本：V1.0（首个正式版本）** · [更新日志](CHANGELOG.md)
 
 一套技术栈无关、可持续维护的 **AI Agent 工程化开发指令、可复用 Skills 与质量约束**。
 
@@ -19,7 +19,6 @@
 - 🏗️ **可追溯的工程决策**：需求、设计、实现、测试和 ADR。
 - 🧩 **8 个项目级 Skills**：Git、GitHub Issues、PR、GitHub Actions 安全与效率。
 - ✅ **轻量质量检查**：自动校验版本、Markdown 相对链接、Skills 元数据及许可声明。
-- 🔄 **GitHub → CNB**：受控的 `main` 分支单向同步。
 
 ## 🚀 快速使用
 
@@ -34,7 +33,7 @@
 
 注意：仅复制 Prompt 不等于已经执行初始化。若 Agent 无法访问仓库或运行命令，必须明确告知限制。
 
-## 📁 仓库结构
+## 📁 面向使用者的仓库结构
 
 ```text
 agent-engineering-kit/
@@ -48,7 +47,6 @@ agent-engineering-kit/
 │   └── project-initialization.zh-CN.md
 ├── docs/
 │   ├── SKILLS.md
-│   ├── SYNC_CNB.md
 │   └── QUALITY.md
 ├── .agents/
 │   └── skills/                 # 8 个项目级 Skills
@@ -58,9 +56,10 @@ agent-engineering-kit/
 │   └── test_validate_repository.py
 └── .github/
     └── workflows/
-        ├── quality.yml
-        └── sync-cnb.yml
+        └── quality.yml
 ```
+
+以上为面向使用者的主要文件索引，并非完整仓库文件树。
 
 ## 🧩 Skills
 
@@ -78,10 +77,6 @@ python -m unittest discover -s tests -v
 ```
 
 GitHub Actions 会在提交至 `main`、面向 `main` 的 Pull Request 以及手动触发时运行相同检查；详见 [质量检查说明](docs/QUALITY.md)。
-
-## 🔄 GitHub → CNB
-
-GitHub `main` 更新后，独立 Actions 工作流使用你在 GitHub Secrets 中配置的 `CNB_TOKEN`，将 `main` 同步到 [CNB 仓库](https://cnb.cool/adui-studio/agent-engineering-kit)。不使用强制推送；错误处理详见 [同步说明](docs/SYNC_CNB.md)。
 
 ## 🤝 贡献与版本维护
 

@@ -12,7 +12,6 @@
 - [Skills 清单与使用边界](docs/SKILLS.md)
 - [版本与更新日志](CHANGELOG.md)
 - [质量检查规范](docs/QUALITY.md)
-- [GitHub → CNB 同步说明](docs/SYNC_CNB.md)
 - [git-commit Skill](.agents/skills/git-commit/SKILL.md)
 
 ## 开发规则

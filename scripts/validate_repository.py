@@ -18,9 +18,7 @@ REQUIRED_FILES = (
     "LICENSE",
     "prompts/project-initialization.zh-CN.md",
     "docs/SKILLS.md",
-    "docs/SYNC_CNB.md",
     "docs/QUALITY.md",
-    ".github/workflows/sync-cnb.yml",
     ".github/workflows/quality.yml",
 )
 LINK_PATTERN = re.compile(r"(?<!!)\[[^\]]+\]\((<?[^\s)]+>?)(?:\s+['\"][^'\"]+['\"])?\)")
