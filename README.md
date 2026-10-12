@@ -56,7 +56,8 @@ agent-engineering-kit/
 │   └── test_validate_repository.py
 └── .github/
     └── workflows/
-        └── quality.yml
+        ├── quality.yml
+        └── publish-release.yml
 ```
 
 以上为面向使用者的主要文件索引，并非完整仓库文件树。
@@ -77,6 +78,13 @@ python -m unittest discover -s tests -v
 ```
 
 GitHub Actions 会在提交至 `main`、面向 `main` 的 Pull Request 以及手动触发时运行相同检查；详见 [质量检查说明](docs/QUALITY.md)。
+
+## 📦 正式版本与下载
+
+- **首个正式版本**：[V1.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0)
+- **Git Tag**：`v1.0.0`（与根目录 `VERSION` 中的 `V1.0` 对应）。
+- GitHub 提供该版本的源代码 ZIP/TAR 下载；无需额外打包才能使用 Prompt。
+- 发布流程、质量门禁与后续版本规则见 [发布维护说明](docs/RELEASING.md)。
 
 ## 🤝 贡献与版本维护
 

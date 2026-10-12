@@ -32,6 +32,10 @@ Skill 的标准流程（审查 diff → 按逻辑暂存 → 选择类型与范�
 
 项目同时收录 [conventional-commit](.agents/skills/conventional-commit/SKILL.md)，用于规范提交消息。两项 Skill 的通用英文示例仅供参考：**本仓库统一采用 `type(scope): emoji 中文描述`**。无论 Skills 如何描述执行流程，实际 Git 提交和推送均需要获得用户授权。
 
+## 正式发布
+
+首次版本与后续发布操作请遵循 [发布规范](docs/RELEASING.md)，发布前先审查代码和 Release Notes；版本 Tag 不得强制覆盖。
+
 ## 提交前验证
 
 修改 Prompt、文档或 Skills 后，建议运行：

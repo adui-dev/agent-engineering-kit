@@ -4,6 +4,8 @@
 
 ## V1.0 — 首个正式版本（2026-10-12）
 
+**发布说明：** [V1.0](docs/releases/V1.0.md) · **Git Tag：** `v1.0.0`
+
 - 🧭 提供跨技术栈工程初始化 Prompt，覆盖 AGENTS、REQUIREMENTS、SDD、ARCHITECTURE、PROJECT_CONTEXT、CODEBASE_MAP、Skills 与 Harness。
 - 🧩 收录 8 项 Git/GitHub/Actions Skills，保留第三方上游版本与 MIT 许可。
 - 📝 提供中文 + Emoji Conventional Commits 协作规则。
@@ -20,4 +22,4 @@
 
 - 更新版本时先调整 [VERSION](VERSION)，再同步 Prompt、README、AGENTS 及本文档。
 - 新增正式版本章节，不覆盖历史记录。
-- Git Tag 和 GitHub Release 需在通过检查并得到明确授权后单独创建。
+- Git Tag 和 GitHub Release 仅在通过检查并得到明确授权后创建；流程见 [发布规范](docs/RELEASING.md)，不强制修改已发布版本。
