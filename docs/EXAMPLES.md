@@ -17,10 +17,11 @@
 python scripts/validate_repository.py
 python -m unittest discover -s tests -v
 python -m unittest discover -s examples/existing-python/tests -v
+python scripts/smoke_init.py
 bash scripts/smoke_init.sh
 ```
 
-Smoke Test 会在临时目录中验证：dry-run 不写入文件、选择性安装、Prompt 内容完整、第三方许可被保留、已有 Python 项目测试仍通过、重复安装被阻止。
+Python Smoke Test 跨平台运行真实 CLI 子进程，在临时目录中验证：dry-run 不写入文件、三类 Agent 目录适配、Prompt 内容完整、第三方许可及引用资料被保留、已有 Python 项目测试仍通过、重复安装被阻止。Bash 版本额外覆盖 Linux 场景。
 
 ## Agent 实际初始化的人工验收
 

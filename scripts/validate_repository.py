@@ -26,6 +26,7 @@ REQUIRED_FILES = (
     "docs/MAINTENANCE.md",
     "scripts/init.py",
     "scripts/smoke_init.sh",
+    "scripts/smoke_init.py",
     "tests/test_init.py",
     "examples/greenfield/README.md",
     "examples/existing-python/README.md",

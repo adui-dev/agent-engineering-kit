@@ -90,24 +90,52 @@ def check_conflicts(target: Path, plan: list[tuple[Path, Path]]) -> list[str]:
 
 
 def apply_plan(target: Path, plan: list[tuple[Path, Path]]) -> None:
-    """Write exclusively; roll back files created by this invocation on failure."""
+    """Write exclusively; reject changed targets and roll back our outputs on failure.
+
+    This checks the destination immediately before writing, but does not claim
+    atomic protection against another process replacing directories concurrently.
+    """
+    target = target.absolute()
+    if target.is_symlink() or not target.is_dir():
+        raise ValueError("目标必须是已存在、非符号链接的目录")
+    root = target.resolve()
+
+    for source, dest in plan:
+        destination = dest.absolute()
+        if not destination.is_relative_to(target):
+            raise ValueError(f"目标文件超出项目目录：{dest}")
+        if source.is_symlink() or not source.is_file():
+            raise ValueError(f"源文件不存在或是符号链接：{source}")
+    conflicts = check_conflicts(target, plan)
+    if conflicts:
+        raise FileExistsError("；".join(conflicts))
+
     written: list[Path] = []
     created_dirs: list[Path] = []
     try:
         for source, dest in plan:
-            missing = []
+            data = source.read_bytes()
+            # Re-check after planning, including parents that might have changed.
+            if not dest.parent.resolve().is_relative_to(root):
+                raise ValueError(f"目标父目录超出项目范围：{dest.parent}")
+            if dest.exists() or dest.is_symlink():
+                raise FileExistsError(f"目标文件已存在：{dest}")
+            missing: list[Path] = []
             parent = dest.parent
             while parent != target and not parent.exists():
                 missing.append(parent)
                 parent = parent.parent
             for folder in reversed(missing):
+                if folder.is_symlink():
+                    raise ValueError(f"目标路径包含符号链接：{folder}")
                 folder.mkdir()
                 created_dirs.append(folder)
-            # Exclusive creation prevents replacing an existing file, even if one
-            # appears between the initial check and the write.
+            if not dest.parent.resolve().is_relative_to(root):
+                raise ValueError(f"目标父目录超出项目范围：{dest.parent}")
+            # Exclusive creation prevents replacing a file created since the check.
             with dest.open("xb") as output:
                 written.append(dest)
-                output.write(source.read_bytes())
+                output.write(data)
     except Exception:
         for file in reversed(written):
             file.unlink(missing_ok=True)

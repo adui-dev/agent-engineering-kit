@@ -54,6 +54,9 @@ jobs:
       - name: "🐍 验证已有示例项目"
         run: python -m unittest discover -s examples/existing-python/tests -v
 
-      - name: "🚦 运行初始化 Smoke Test"
+      - name: "🧪 跨平台真实 CLI 安装测试"
+        run: python scripts/smoke_init.py
+
+      - name: "🚦 运行 Bash Smoke Test"
         if: runner.os == 'Linux'
         run: bash scripts/smoke_init.sh

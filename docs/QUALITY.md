@@ -23,7 +23,7 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 | 版本 | 两份 README、中英文 Prompt、AGENTS、CHANGELOG 与 VERSION 一致 |
 | 本地链接 | 根目录 Markdown（包含中英文 README）、docs、prompts 和 Skill 主入口 SKILL.md 的相对路径；排除外部地址和围栏代码示例 |
 | Skills | 检查 `SKILL.md` frontmatter 的 name、description、目录名与索引、第三方许可文件 |
-| 测试 | unittest 覆盖仓库结构及 CLI 的预览、冲突、符号链接、回滚等安全路径；Smoke Test 验证真实文件复制和已有项目回归 |
+| 测试 | unittest 覆盖仓库结构及 CLI 的预览、冲突、路径限制、符号链接与回滚；跨平台 Python Smoke Test 实际启动 CLI 并验证复制、许可与现有项目回归 |
 
 **不自动覆盖**：Markdown 锚点、外部网址可用性、第三方所有 reference 文件的语义校验、业务逻辑、实际 Actions 安全审计或运行效果。
 
@@ -37,7 +37,7 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 ## GitHub Actions
 
-质量检查覆盖 Ubuntu 的 Python 3.10、3.13，以及 Windows 的 Python 3.13（均由固定 SHA 的官方 `actions/setup-python` 配置）。文档校验、单元测试和示例回归测试在三个组合中运行；Bash 安装 Smoke Test 仅在 Ubuntu 中运行。Windows CI 显式设置 `PYTHONUTF8=1` 与 `PYTHONIOENCODING=utf-8`，避免中文日志在非 UTF-8 控制台中触发编码异常。Windows 符号链接创建可能受权限限制，相关测试会按预期跳过，不能误报为平台已通过全部符号链接测试。
+质量检查覆盖 Ubuntu 的 Python 3.10、3.13，以及 Windows 的 Python 3.13（均由固定 SHA 的官方 `actions/setup-python` 配置）。文档校验、单元测试、示例回归测试以及 Python 安装 Smoke Test 在三个组合中运行；额外的 Bash Smoke Test 仅在 Ubuntu 中运行。Windows CI 显式设置 `PYTHONUTF8=1` 与 `PYTHONIOENCODING=utf-8`，避免中文日志在非 UTF-8 控制台中触发编码异常。Windows 符号链接创建可能受权限限制，相关测试会按预期跳过，不能误报为平台已通过全部符号链接测试。
 
 检查结果请以 GitHub Actions 的三个矩阵作业结论为准。
 
@@ -51,10 +51,11 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 python3 scripts/validate_repository.py
 python3 -m unittest discover -s tests -v
 python3 -m unittest discover -s examples/existing-python/tests -v
+python3 scripts/smoke_init.py
 bash scripts/smoke_init.sh
 ```
 
-其中 `bash` 检查用于 Linux CI 或 Bash 环境；Windows 可运行 Python 部分。
+Python Smoke Test 使用真实 CLI 子进程，在 Windows、Linux 和 macOS 上运行；额外的 `bash` 检查用于 Linux CI 或 Bash 环境。静态规则和 Smoke Tests 均不等于真正运行了 Agent 客户端。
 
 ## 版本发布检查
 

@@ -77,16 +77,27 @@ my-project/
 
 **注意：** 该工具只负责文件复制。安装之后，需要在目标项目的 AI 编程工具中**明确要求 Agent 阅读** `.agents/prompts/project-initialization.md` 并开始项目审查；目标工具是否会自动加载 Skills 必须另行验证。
 
+## Windows 原生安装验收
+
+无需 Git Bash 或 WSL，Windows PowerShell 可以直接执行跨平台 Smoke Test：
+
+```powershell
+python scripts/smoke_init.py
+```
+
+测试在临时目录中运行真实 CLI 子进程，验证默认预览、中文和英文 Prompt、不同 Agent Skills 目录、引用资料、许可证、原项目测试以及重复安装拒绝。**这不等于已启动 Codex/OpenCode/Claude Code 客户端完成端到端测试。**
+
 ## 实际验证
 
 参阅 [使用示例与验收](EXAMPLES.md) 或从仓库根目录运行：
 
 ```bash
 python -m unittest discover -s tests -v
+python scripts/smoke_init.py
 bash scripts/smoke_init.sh
 ```
 
-`smoke_init.sh` 是 Linux/macOS/GitHub Actions 使用的 Bash 脚本。Windows PowerShell 用户可直接运行 Python 单元测试，或在 Git Bash/WSL 环境中运行 Smoke Test。所有写入演示均在临时目录中进行。
+`smoke_init.py` 可在 Windows、Linux 和 macOS 运行；`smoke_init.sh` 额外验证 Bash 场景（适用于 Linux/macOS/Git Bash/WSL）。两者均只在临时目录中写入测试内容。
 
 ## 维护规则
 

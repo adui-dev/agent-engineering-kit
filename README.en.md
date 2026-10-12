@@ -58,7 +58,7 @@ python scripts/init.py --target ../my-project --lang en --skill git-commit
 python scripts/init.py --target ../my-project --lang en --skill git-commit --apply
 ```
 
-Use `--agent codex`, `--agent opencode`, or `--agent claude-code` to select the documented Skills layout (Claude Code uses `.claude/skills/`). The CLI **does not generate project-specific requirements, run third-party Skills, or overwrite existing files**. See the [installation guide](docs/INSTALLATION.md) and [runnable examples](docs/EXAMPLES.md) (documentation currently in Chinese).
+Use `--agent codex`, `--agent opencode`, or `--agent claude-code` to select the documented Skills layout (Claude Code uses `.claude/skills/`). The CLI **does not generate project-specific requirements, run third-party Skills, or overwrite existing files**. Cross-platform installation checks are available with `python scripts/smoke_init.py` (Windows/Linux/macOS). See the [installation guide](docs/INSTALLATION.md) and [runnable examples](docs/EXAMPLES.md) (documentation currently in Chinese).
 
 ## 🧭 Eight core engineering assets
 

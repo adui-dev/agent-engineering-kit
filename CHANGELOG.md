@@ -4,6 +4,9 @@
 
 ## 未发布（Unreleased）
 
+- 🛡️ 安装 CLI 在实际写入前重新校验路径、源文件和目标冲突，补充路径越界、符号链接变化、写入失败回滚等测试。
+- 🧪 新增跨平台 Python 安装 Smoke Test，在 Windows 与 Ubuntu CI 中运行真实 CLI 子进程并校验已有项目代码不变。
+
 - ✅ 将 CI 扩展至 Ubuntu/Python 3.10、3.13 与 Windows/Python 3.13，统一 UTF-8 输出编码；发布前验证也包括初始化 Smoke Test。
 
 - 🔧 支持按 Codex、OpenCode、Claude Code 选择 Skills 目标目录，并补充目录隔离、符号链接和兼容路径的回归测试。

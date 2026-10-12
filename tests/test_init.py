@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -136,15 +136,68 @@ class InitTests(unittest.TestCase):
         plan = build_plan(self.source, self.target, "en", [])
         self.assertTrue(any("符号链接" in msg for msg in check_conflicts(self.target, plan)))
 
-    def test_rollback_when_later_source_read_fails(self):
+    def test_missing_source_is_rejected_before_any_write(self):
         plan = build_plan(self.source, self.target, "en", ["example"])
-        missing = self.source / "prompts/missing-late.md"
-        # Force a read failure after some output files have been created.
-        plan.append((missing, self.target / "last.md"))
-        with self.assertRaises(FileNotFoundError):
+        plan.append((self.source / "prompts/missing-late.md", self.target / "last.md"))
+        with self.assertRaises(ValueError):
             apply_plan(self.target, plan)
         self.assertFalse((self.target / ".agents").exists())
-        self.assertFalse((self.target / "last.md").exists())
+
+    def test_rollback_when_later_source_read_fails(self):
+        plan = build_plan(self.source, self.target, "en", ["example"])
+        broken = plan[-1][0]
+        original_read = Path.read_bytes
+
+        def fail_late(path):
+            if path == broken:
+                raise OSError("simulated I/O failure")
+            return original_read(path)
+
+        with mock.patch.object(Path, "read_bytes", fail_late):
+            with self.assertRaises(OSError):
+                apply_plan(self.target, plan)
+        self.assertFalse((self.target / ".agents").exists())
+
+    def test_apply_refuses_a_plan_escaping_target(self):
+        plan = [(self.source / "prompts/project-initialization.en.md",
+                 self.target.parent / "escaped.md")]
+        with self.assertRaises(ValueError):
+            apply_plan(self.target, plan)
+        self.assertFalse((self.target.parent / "escaped.md").exists())
+
+    def test_apply_rechecks_parent_symlink_after_planning(self):
+        outside = self.target.parent / "outside"
+        outside.mkdir()
+        plan = build_plan(self.source, self.target, "en", [])
+        try:
+            (self.target / ".agents").symlink_to(outside, target_is_directory=True)
+        except (OSError, NotImplementedError):
+            self.skipTest("symlink creation not available")
+        with self.assertRaises((ValueError, FileExistsError)):
+            apply_plan(self.target, plan)
+        self.assertEqual(list(outside.iterdir()), [])
+
+    def test_apply_rechecks_conflicts_before_writing_anything(self):
+        plan = build_plan(self.source, self.target, "en", ["example"])
+        occupied = plan[-1][1]
+        occupied.parent.mkdir(parents=True)
+        occupied.write_text("existing", encoding="utf-8")
+        with self.assertRaises(FileExistsError):
+            apply_plan(self.target, plan)
+        self.assertEqual(occupied.read_text(encoding="utf-8"), "existing")
+        self.assertFalse((self.target / ".agents/prompts").exists())
+
+    def test_apply_refuses_source_replaced_with_symlink(self):
+        plan = build_plan(self.source, self.target, "en", [])
+        source = plan[0][0]
+        source.unlink()
+        try:
+            source.symlink_to(self.source / "prompts/project-initialization.zh-CN.md")
+        except (OSError, NotImplementedError):
+            self.skipTest("symlink creation not available")
+        with self.assertRaises(ValueError):
+            apply_plan(self.target, plan)
+        self.assertFalse((self.target / ".agents").exists())
 
 
 if __name__ == "__main__":

@@ -58,7 +58,7 @@ python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit
 python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit --apply
 ```
 
-可以加上 `--agent codex`、`--agent opencode` 或 `--agent claude-code`，选择适配的 Skills 目录（Claude Code 使用 `.claude/skills/`）。脚本只负责复制选定的 Prompt 与 Skills，**不自动生成项目文档、执行 Skill 或覆盖已有文件**。详见 [安装使用说明](docs/INSTALLATION.md)、[可运行示例与验收](docs/EXAMPLES.md)。
+可以加上 `--agent codex`、`--agent opencode` 或 `--agent claude-code`，选择适配的 Skills 目录（Claude Code 使用 `.claude/skills/`）。脚本只负责复制选定的 Prompt 与 Skills，**不自动生成项目文档、执行 Skill 或覆盖已有文件**。本仓库还提供 Windows/Linux/macOS 均可执行的 `python scripts/smoke_init.py` 安装验收。详见 [安装使用说明](docs/INSTALLATION.md)、[可运行示例与验收](docs/EXAMPLES.md)。
 
 ## 🧭 八大核心工程资产
 
