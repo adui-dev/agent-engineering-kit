@@ -23,6 +23,8 @@ python scripts/init.py --target ..\my-project --lang zh-CN --skill git-commit --
 python scripts/init.py --list-skills
 ```
 
+如 Windows 终端出现中文输出编码异常，可先执行 `$env:PYTHONUTF8 = "1"`，再运行上述命令；这不会改变 CLI 默认的预览与禁止覆盖规则。
+
 ### Linux / macOS
 
 ```bash

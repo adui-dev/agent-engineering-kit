@@ -37,7 +37,7 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 ## GitHub Actions
 
-质量检查覆盖 Ubuntu 的 Python 3.10、3.13，以及 Windows 的 Python 3.13（均由固定 SHA 的官方 `actions/setup-python` 配置）。文档校验、单元测试和示例回归测试在三个组合中运行；Bash 安装 Smoke Test 仅在 Ubuntu 中运行。Windows 符号链接创建可能受权限限制，相关测试会按预期跳过，不能误报为平台已通过全部符号链接测试。
+质量检查覆盖 Ubuntu 的 Python 3.10、3.13，以及 Windows 的 Python 3.13（均由固定 SHA 的官方 `actions/setup-python` 配置）。文档校验、单元测试和示例回归测试在三个组合中运行；Bash 安装 Smoke Test 仅在 Ubuntu 中运行。Windows CI 显式设置 `PYTHONUTF8=1` 与 `PYTHONIOENCODING=utf-8`，避免中文日志在非 UTF-8 控制台中触发编码异常。Windows 符号链接创建可能受权限限制，相关测试会按预期跳过，不能误报为平台已通过全部符号链接测试。
 
 检查结果请以 GitHub Actions 的三个矩阵作业结论为准。
 
