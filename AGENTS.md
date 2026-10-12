@@ -10,6 +10,7 @@
 - [README](README.md)
 - [提交规范](CONTRIBUTING.md)
 - [Skills 清单与使用边界](docs/SKILLS.md)
+- [GitHub → CNB 同步说明](docs/SYNC_CNB.md)
 - [git-commit Skill](.agents/skills/git-commit/SKILL.md)
 
 ## 开发规则

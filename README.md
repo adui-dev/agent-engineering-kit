@@ -48,6 +48,10 @@ prompts/
 
 注意：Skills 仅随仓库分发，能否在目标 AI 编程工具中自动发现，取决于该工具对 `.agents/skills` 的支持；GitHub 操作也需要相应连接、凭据和明确授权。
 
+## 🔄 GitHub → CNB 自动同步
+
+每次推送 GitHub `main` 分支时，自动使用 Actions Secret `CNB_TOKEN` 将该分支同步至 [CNB 镜像仓库](https://cnb.cool/adui-studio/agent-engineering-kit)。也支持手动运行，不使用强制推送。首次运行与冲突排查见 [同步说明](docs/SYNC_CNB.md)。
+
 ## 🛠️ 开发与提交
 
 仓库贡献约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。默认使用中文和 Emoji 提交消息；引入第三方 Skills 必须注明上游及许可。
