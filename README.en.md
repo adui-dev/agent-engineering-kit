@@ -34,9 +34,7 @@ Open the project you want to initialize in Codex, OpenCode, Claude Code, or anot
 
 **2. Copy the initialization prompt**
 
-Open **[📋 Universal Project Initialization Prompt V1.0](prompts/project-initialization.zh-CN.md)** and send its full contents to your coding agent.
-
-The **initialization prompt is currently maintained in Simplified Chinese**. This English README is a guide to the existing repository; it does not imply a separate English prompt exists. You can ask your agent to translate the prompt while preserving its requirements and constraints.
+Choose **[📋 Universal Project Initialization Prompt V1.0 (English)](prompts/project-initialization.en.md)** or the **[Simplified Chinese version](prompts/project-initialization.zh-CN.md)**. Send the complete prompt in your preferred language to your coding agent. Both versions cover the same 16 sections, engineering assets, and execution constraints.
 
 **3. Review the actual deliverables**
 
@@ -90,7 +88,7 @@ Skills are stored under `.agents/skills/`. **Automatic discovery depends on your
 
 | Path | Purpose |
 | --- | --- |
-| [Initialization prompt](prompts/project-initialization.zh-CN.md) | Instructions for project setup and continuous development (Chinese) |
+| [Initialization prompt (English)](prompts/project-initialization.en.md) / [中文版本](prompts/project-initialization.zh-CN.md) | Complete instructions for project setup and continuous development in either language |
 | [AGENTS.md](AGENTS.md) | Rules for agents working on this toolkit (Chinese) |
 | [Skills index](docs/SKILLS.md) | Skill sources, usage, and maintenance (Chinese) |
 | [Quality checks](docs/QUALITY.md) | Local checks, CI, and validation scope (Chinese) |

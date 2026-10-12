@@ -35,8 +35,8 @@ Skill 的标准流程（审查 diff → 按逻辑暂存 → 选择类型与范�
 ## 中英文文档维护
 
 - [README.md](README.md) 是默认中文版，[README.en.md](README.en.md) 为英文版。两个入口必须相互链接。
-- 项目介绍、主要能力、使用步骤、版本与许可证说明变动时，同步更新两份 README，不添加未实现的英文初始化 Prompt。
-- 仓库中的项目规范和上游 Skills 保持各自原有语言；英文版 README 应准确指向真实存在的文件，不应虚构英文版规范。
+- 项目介绍、主要能力、使用步骤、版本与许可证说明变动时，同步更新两份 README。初始化 Prompt 同时维护 [中文版](prompts/project-initialization.zh-CN.md) 和 [英文版](prompts/project-initialization.en.md)，保持章节结构、权限限制、测试和交付要求一致。
+- 仓库中的其他专项规范和上游 Skills 保持原有语言；请勿把只有中文版的其他文件描述成已有英文翻译。
 - 修改后运行项目文档验证和单元测试。
 
 ## 正式发布

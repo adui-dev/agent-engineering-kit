@@ -18,6 +18,7 @@ REQUIRED_FILES = (
     "CHANGELOG.md",
     "LICENSE",
     "prompts/project-initialization.zh-CN.md",
+    "prompts/project-initialization.en.md",
     "docs/SKILLS.md",
     "docs/QUALITY.md",
     ".github/workflows/quality.yml",
@@ -65,12 +66,35 @@ def check_repository(root: Path) -> list[str]:
         "AGENTS.md": version,
         "CHANGELOG.md": version,
         "prompts/project-initialization.zh-CN.md": f"版本：{version}",
+        "prompts/project-initialization.en.md": f"Version: {version}",
     }
     if version:
         for relative, marker in checks.items():
             path = root / relative
             if path.is_file() and marker not in path.read_text(encoding="utf-8"):
                 errors.append(f"{relative} 未体现当前版本 {version}")
+
+
+    # Check bilingual prompt structure; this does not guarantee semantic equivalence.
+    zh_file = root / "prompts/project-initialization.zh-CN.md"
+    en_file = root / "prompts/project-initialization.en.md"
+    if zh_file.is_file() and en_file.is_file():
+        zh_text = zh_file.read_text(encoding="utf-8")
+        en_text = en_file.read_text(encoding="utf-8")
+        expected_zh = [
+            "一", "二", "三", "四", "五", "六", "七", "八",
+            "九", "十", "十一", "十二", "十三", "十四", "十五", "十六",
+        ]
+        zh_sections = re.findall(r"(?m)^## ([一二三四五六七八九十]+)、", zh_text)
+        en_sections = [int(n) for n in re.findall(r"(?m)^## ([0-9]+)\. ", en_text)]
+        if zh_sections != expected_zh:
+            errors.append("中文 Prompt 主章节必须按顺序包含一至十六章")
+        if en_sections != list(range(1, 17)):
+            errors.append("英文 Prompt 主章节必须按顺序包含 1 至 16 章")
+        for name, body in (("中文", zh_text), ("英文", en_text)):
+            assets = re.findall(r"(?m)^### 5\.([0-9]+)\s", body)
+            if assets != [str(n) for n in range(1, 9)]:
+                errors.append(f"{name} Prompt 必须按顺序包含 5.1 至 5.8 八个核心资产")
 
     skill_dir = root / ".agents" / "skills"
     skills = sorted(p for p in skill_dir.iterdir() if p.is_dir()) if skill_dir.is_dir() else []

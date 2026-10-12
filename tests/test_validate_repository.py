@@ -23,7 +23,17 @@ class RepositoryValidatorTests(unittest.TestCase):
         (self.root / "README.en.md").write_text("# V1.0\n[简体中文](README.md)\n", encoding="utf-8")
         (self.root / "AGENTS.md").write_text("# V1.0\n", encoding="utf-8")
         (self.root / "CHANGELOG.md").write_text("# V1.0\n", encoding="utf-8")
-        (self.root / "prompts/project-initialization.zh-CN.md").write_text("版本：V1.0\n", encoding="utf-8")
+        zh_numbers = ["一", "二", "三", "四", "五", "六", "七", "八",
+                      "九", "十", "十一", "十二", "十三", "十四", "十五", "十六"]
+        zh_sections = "".join(f"## {n}、章节\n" for n in zh_numbers)
+        en_sections = "".join(f"## {n}. Section\n" for n in range(1, 17))
+        assets = "".join(f"### 5.{n} Asset\n" for n in range(1, 9))
+        (self.root / "prompts/project-initialization.zh-CN.md").write_text(
+            "版本：V1.0\n" + zh_sections + assets, encoding="utf-8"
+        )
+        (self.root / "prompts/project-initialization.en.md").write_text(
+            "Version: V1.0\n" + en_sections + assets, encoding="utf-8"
+        )
         (self.root / "docs/SKILLS.md").write_text("[skill](../.agents/skills/example/SKILL.md)\n", encoding="utf-8")
         folder = self.root / ".agents/skills/example"
         folder.mkdir(parents=True)
@@ -48,6 +58,32 @@ class RepositoryValidatorTests(unittest.TestCase):
     def test_english_readme_invalid_link(self):
         (self.root / "README.en.md").write_text("# V1.0\n[missing](missing-file.md)\n", encoding="utf-8")
         self.assertTrue(any("README.en.md" in e and "无效文件链接" in e for e in check_repository(self.root)))
+
+
+    def test_missing_english_prompt(self):
+        (self.root / "prompts/project-initialization.en.md").unlink()
+        self.assertTrue(any("prompts/project-initialization.en.md" in e for e in check_repository(self.root)))
+
+    def test_english_prompt_version_mismatch(self):
+        entry = self.root / "prompts/project-initialization.en.md"
+        entry.write_text(entry.read_text(encoding="utf-8").replace("Version: V1.0", "Version: V1.1"), encoding="utf-8")
+        self.assertTrue(any("英文" in e or "project-initialization.en.md" in e
+                            for e in check_repository(self.root)))
+
+    def test_missing_english_main_section(self):
+        entry = self.root / "prompts/project-initialization.en.md"
+        entry.write_text(entry.read_text(encoding="utf-8").replace("## 16. Section", ""), encoding="utf-8")
+        self.assertTrue(any("英文 Prompt 主章节" in e for e in check_repository(self.root)))
+
+    def test_missing_english_core_asset(self):
+        entry = self.root / "prompts/project-initialization.en.md"
+        entry.write_text(entry.read_text(encoding="utf-8").replace("### 5.8 Asset", ""), encoding="utf-8")
+        self.assertTrue(any("英文 Prompt 必须" in e for e in check_repository(self.root)))
+
+    def test_chinese_prompt_main_section_mismatch(self):
+        entry = self.root / "prompts/project-initialization.zh-CN.md"
+        entry.write_text(entry.read_text(encoding="utf-8").replace("## 十六、章节", ""), encoding="utf-8")
+        self.assertTrue(any("中文 Prompt 主章节" in e for e in check_repository(self.root)))
 
     def test_version_mismatch(self):
         (self.root / "prompts/project-initialization.zh-CN.md").write_text("版本：V2.0\n", encoding="utf-8")

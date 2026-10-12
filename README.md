@@ -34,7 +34,7 @@ Agent Engineering Kit 是一套**技术栈无关、面向长期开发**的 AI Ag
 
 **2. 复制初始化指令**
 
-打开 **[📋 通用项目初始化 Prompt V1.0](prompts/project-initialization.zh-CN.md)**，复制全文发送给 AI Agent。当前 Prompt 以**简体中文**维护。
+选择并打开 **[📋 中文初始化 Prompt V1.0](prompts/project-initialization.zh-CN.md)** 或 **[English Prompt V1.0](prompts/project-initialization.en.md)**，将对应语言的完整指令发送给 AI Agent。两版均覆盖相同的 16 个章节和核心工程约束。
 
 **3. 审核实际交付**
 
@@ -88,7 +88,7 @@ Skills 存放在 `.agents/skills/`。**能否自动发现由所用 AI 编程工�
 
 | 路径 | 内容 |
 | --- | --- |
-| [初始化 Prompt](prompts/project-initialization.zh-CN.md) | 完整的项目初始化与持续开发指令 |
+| [中文初始化 Prompt](prompts/project-initialization.zh-CN.md) / [English Prompt](prompts/project-initialization.en.md) | 对应语言的完整项目初始化与持续开发指令 |
 | [AGENTS.md](AGENTS.md) | 本仓库的 Agent 协作规则 |
 | [Skills 索引](docs/SKILLS.md) | 技能使用方式、来源与维护约定 |
 | [质量检查说明](docs/QUALITY.md) | 本地验证、CI 和检查边界 |
