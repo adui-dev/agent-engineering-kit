@@ -8,6 +8,10 @@
 | OpenCode | `.agents/skills/` | CI 已验证文件安装 | 待客户端实测 | 待客户端实测 |
 | Claude Code | `.claude/skills/` | CI 已验证文件安装 | 待客户端实测 | 待客户端实测 |
 
+## 可运行验收工作区
+
+Windows、Ubuntu 等环境可使用 [prepare_agent_acceptance.py](../scripts/prepare_agent_acceptance.py) 创建可丢弃测试目录、初始化 Prompt、选定 Skill 和状态清单。自动准备只确认安装完整性；客户端 Skill 发现与执行必须由实际软件验证。步骤见 [验收指南](AGENT_ACCEPTANCE.md)。
+
 ## 分层验收
 
 按 [真实 Agent 端到端验收](AGENT_ACCEPTANCE.md) 中的 L1–L5 步骤，先用 [只读完整性检查](../scripts/verify_installation.py) 核对安装文件，再在真实客户端测试 Skill 的自动发现、原生调用及项目初始化。直接读取 `SKILL.md` 不能单独证明客户端的技能发现成功。

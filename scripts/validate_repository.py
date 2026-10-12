@@ -29,6 +29,8 @@ REQUIRED_FILES = (
     "scripts/smoke_init.sh",
     "scripts/smoke_init.py",
     "scripts/verify_installation.py",
+    "scripts/prepare_agent_acceptance.py",
+    "tests/test_prepare_agent_acceptance.py",
     "tests/test_verify_installation.py",
     "docs/AGENT_ACCEPTANCE.md",
     "tests/test_init.py",

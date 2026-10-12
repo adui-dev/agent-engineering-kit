@@ -110,6 +110,7 @@ Skills 存放在 `.agents/skills/`。**能否自动发现由所用 AI 编程工�
 | [示例与验收](docs/EXAMPLES.md) | 空仓库与已有 Python 项目示例、自动验证 |
 | [工具兼容性](docs/COMPATIBILITY.md) | Codex、OpenCode、Claude Code 的待验证项 |
 | [端到端验收](docs/AGENT_ACCEPTANCE.md) | 客户端发现、Skill 调用和真实初始化验收 |
+| [验收工作区准备工具](scripts/prepare_agent_acceptance.py) | 在仓库外安全创建 Codex/OpenCode/Claude Code 测试项目 |
 | [安全政策](SECURITY.md) | 私密漏洞报告和供应链风险说明 |
 | [仓库维护设置](docs/MAINTENANCE.md) | 主分支保护、必需 CI 与发布审批操作 |
 | [贡献指南](CONTRIBUTING.md) | 中文、Emoji 和 Conventional Commits 规范 |
