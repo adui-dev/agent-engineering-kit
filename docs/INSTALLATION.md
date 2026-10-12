@@ -32,6 +32,24 @@ python3 scripts/init.py --target ../my-project --lang en --skill git-commit --ap
 
 `--skill` 可以重复指定，例如 `--skill git-commit --skill github-issues`。不指定时仅安装 Prompt。
 
+**选择目标 Agent：** 使用 `--agent` 显式选择安装目录。默认值是 `generic`，以保持原有命令兼容。
+
+| `--agent` | Skills 安装位置 | 说明 |
+| --- | --- | --- |
+| `generic`（默认） | `.agents/skills/` | 按需复用，自动发现取决于工具 |
+| `codex` | `.agents/skills/` | 按 Codex 项目 Skills 约定安装 |
+| `opencode` | `.agents/skills/` | OpenCode 官方支持的兼容路径 |
+| `claude-code` | `.claude/skills/` | Claude Code 项目 Skills 标准目录 |
+
+例如给 Claude Code 安装英文 Prompt 和指定 Skill：
+
+```powershell
+python scripts/init.py --target ..\\my-project --lang en --agent claude-code --skill git-commit
+python scripts/init.py --target ..\\my-project --lang en --agent claude-code --skill git-commit --apply
+```
+
+该参数只调整 Skills 目录，Prompt 仍保存到 `.agents/prompts/project-initialization.md`，需要明确提示 Agent 阅读。安装路径符合文档规范不等于实测客户端已完成加载。
+
 ## 安装结果
 
 ```text
@@ -51,7 +69,7 @@ my-project/
 
 - **默认 dry-run**：不加 `--apply` 只显示将写入的路径，目标目录不会变化。
 - **不覆盖已有文件**：安装前检查所有目标文件；发现冲突便停止，没有 `--force` 参数。
-- **路径保护**：拒绝未知 Skill、路径穿越名称及符号链接技能文件；目标中如有符号链接父目录也会阻止安装。
+- **路径保护**：拒绝未知 Skill、路径穿越名称、工具包目录或其子目录，以及符号链接技能文件；目标中如有符号链接父目录也会阻止安装。
 - **失败回滚**：写入途中异常时删除本次创建的文件和空目录，不删除原有内容。
 - **不做超出授权的操作**：不自动调用 Agent、不执行第三方 Skill、不操作 Git 提交/推送、不修改业务代码。
 

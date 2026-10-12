@@ -4,6 +4,9 @@
 
 ## 未发布（Unreleased）
 
+- 🔧 支持按 Codex、OpenCode、Claude Code 选择 Skills 目标目录，并补充目录隔离、符号链接和兼容路径的回归测试。
+- 📖 明确官方目录兼容与真实客户端实测的区别，保留尚未完成的 E2E 验收状态。
+
 - 🧰 新增 Python 标准库初始化 CLI：默认预览、按需选择语言和 Skills、冲突拒绝及失败回滚。
 - 🧪 增加空项目与已有 Python 项目的使用示例、CLI 单元测试与 Smoke Test，并接入 CI。
 - 🔐 增加安全政策、Issue/PR 模板与 CODEOWNERS，准备更规范的开源协作。

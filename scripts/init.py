@@ -15,6 +15,12 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PROMPT_RELATIVE = Path(".agents/prompts/project-initialization.md")
 SKILL_NAME = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+AGENT_SKILLS_DIRS = {
+    "generic": Path(".agents/skills"),
+    "codex": Path(".agents/skills"),
+    "opencode": Path(".agents/skills"),
+    "claude-code": Path(".claude/skills"),
+}
 
 
 def available_skills(source_root: Path = REPOSITORY_ROOT) -> list[str]:
@@ -25,15 +31,19 @@ def available_skills(source_root: Path = REPOSITORY_ROOT) -> list[str]:
 
 
 def build_plan(
-    source_root: Path, target: Path, language: str, skill_names: list[str]
+    source_root: Path, target: Path, language: str, skill_names: list[str], agent: str = "generic"
 ) -> list[tuple[Path, Path]]:
     """Build a complete copy plan without touching the target."""
     if language not in {"zh-CN", "en"}:
         raise ValueError("语言只能是 zh-CN 或 en")
+    if agent not in AGENT_SKILLS_DIRS:
+        raise ValueError(f"未知 Agent 类型：{agent}")
     if target.is_symlink() or not target.is_dir():
         raise ValueError("目标必须是已存在、非符号链接的目录")
-    if target.resolve() == source_root.resolve():
-        raise ValueError("不要将本工具包仓库作为初始化目标")
+    target_resolved = target.resolve()
+    source_resolved = source_root.resolve()
+    if target_resolved.is_relative_to(source_resolved) or source_resolved.is_relative_to(target_resolved):
+        raise ValueError("目标目录不得与工具包仓库重合或相互包含")
 
     prompt = source_root / "prompts" / f"project-initialization.{language}.md"
     if not prompt.is_file() or prompt.is_symlink():
@@ -57,7 +67,7 @@ def build_plan(
                 raise ValueError(f"Skill 内存在符号链接：{item}")
             if item.is_file():
                 relative = item.relative_to(skill_root)
-                plan.append((item, target / ".agents" / "skills" / relative))
+                plan.append((item, target / AGENT_SKILLS_DIRS[agent] / relative))
     return plan
 
 
@@ -115,6 +125,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--target", type=Path, help="已存在的目标项目目录")
     parser.add_argument("--lang", choices=("zh-CN", "en"), default="zh-CN")
+    parser.add_argument(
+        "--agent", choices=tuple(AGENT_SKILLS_DIRS), default="generic",
+        help="目标 Agent（决定 Skills 安装路径；默认 generic）",
+    )
     parser.add_argument("--skill", action="append", default=[], help="可重复指定多个 Skill")
     parser.add_argument("--list-skills", action="store_true", help="列出可安装 Skills")
     parser.add_argument("--apply", action="store_true", help="确认写入，默认只预览")
@@ -128,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("请通过 --target 指定目标项目目录")
     target = args.target.absolute()
     try:
-        plan = build_plan(REPOSITORY_ROOT, target, args.lang, args.skill)
+        plan = build_plan(REPOSITORY_ROOT, target, args.lang, args.skill, args.agent)
         conflicts = check_conflicts(target, plan)
         if conflicts:
             for conflict in conflicts:

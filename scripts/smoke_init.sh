@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
-mkdir -p "$tmp/empty"
+mkdir -p "$tmp/empty" "$tmp/claude"
 cp -R examples/existing-python "$tmp/existing"
 
 python3 scripts/init.py --target "$tmp/empty" --lang en --skill git-commit
@@ -14,6 +14,11 @@ python3 scripts/init.py --target "$tmp/empty" --lang en --skill git-commit --app
 cmp prompts/project-initialization.en.md "$tmp/empty/.agents/prompts/project-initialization.md"
 cmp .agents/skills/git-commit/SKILL.md "$tmp/empty/.agents/skills/git-commit/SKILL.md"
 test -f "$tmp/empty/.agents/skills/git-commit/THIRD_PARTY_LICENSE.md"
+
+python3 scripts/init.py --target "$tmp/claude" --lang en --skill git-commit --agent claude-code --apply
+cmp .agents/skills/git-commit/SKILL.md "$tmp/claude/.claude/skills/git-commit/SKILL.md"
+test -f "$tmp/claude/.claude/skills/git-commit/THIRD_PARTY_LICENSE.md"
+test ! -e "$tmp/claude/.agents/skills"
 
 python3 scripts/init.py --target "$tmp/existing" --lang zh-CN --apply
 cmp prompts/project-initialization.zh-CN.md "$tmp/existing/.agents/prompts/project-initialization.md"
@@ -24,4 +29,4 @@ if python3 scripts/init.py --target "$tmp/existing" --apply >/dev/null 2>&1; the
   echo "ERROR: existing output was not rejected" >&2
   exit 1
 fi
-echo "Smoke check passed: preview, safe install, copy integrity, existing code, and conflicts."
+echo "Smoke check passed: preview, generic/Claude Code skills, licenses, copy integrity, existing code, and conflicts."

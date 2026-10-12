@@ -86,6 +86,37 @@ class InitTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             build_plan(self.source, self.source, "en", [])
 
+    def test_claude_code_places_skills_in_claude_directory(self):
+        plan = build_plan(self.source, self.target, "en", ["example"], agent="claude-code")
+        apply_plan(self.target, plan)
+        self.assertTrue((self.target / ".claude/skills/example/SKILL.md").exists())
+        self.assertTrue((self.target / ".claude/skills/example/references/usage.md").exists())
+        self.assertTrue((self.target / ".claude/skills/example/THIRD_PARTY_LICENSE.md").exists())
+        self.assertFalse((self.target / ".agents/skills").exists())
+
+    def test_codex_and_opencode_use_agent_skills(self):
+        for agent in ("codex", "opencode", "generic"):
+            with self.subTest(agent=agent):
+                plan = build_plan(self.source, self.target, "zh-CN", ["example"], agent=agent)
+                self.assertTrue(any(
+                    path == self.target / ".agents/skills/example/SKILL.md"
+                    for _, path in plan
+                ))
+
+    def test_rejects_invalid_agent(self):
+        with self.assertRaises(ValueError):
+            build_plan(self.source, self.target, "en", [], agent="unknown")
+
+    def test_rejects_nested_target_inside_toolkit(self):
+        nested = self.source / "some-project"
+        nested.mkdir()
+        with self.assertRaises(ValueError):
+            build_plan(self.source, nested, "en", [])
+
+    def test_rejects_target_containing_toolkit(self):
+        with self.assertRaises(ValueError):
+            build_plan(self.source, self.source.parent, "en", [])
+
     def test_rejects_source_skill_symlinks(self):
         ref = self.source / ".agents/skills/example/references/outside"
         try:
