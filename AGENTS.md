@@ -18,6 +18,7 @@
 - [CLI 安全安装](docs/INSTALLATION.md)
 - [示例与验收](docs/EXAMPLES.md)
 - [安全政策](SECURITY.md)
+- [GitHub 仓库保护设置](docs/MAINTENANCE.md)
 - [git-commit Skill](.agents/skills/git-commit/SKILL.md)
 
 ## 开发规则

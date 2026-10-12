@@ -23,6 +23,7 @@ REQUIRED_FILES = (
     "docs/INSTALLATION.md",
     "docs/EXAMPLES.md",
     "docs/COMPATIBILITY.md",
+    "docs/MAINTENANCE.md",
     "scripts/init.py",
     "scripts/smoke_init.sh",
     "tests/test_init.py",

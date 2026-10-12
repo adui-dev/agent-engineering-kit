@@ -110,6 +110,7 @@ Skills are stored under `.agents/skills/`. **Automatic discovery depends on your
 | [Examples and acceptance](docs/EXAMPLES.md) | Greenfield and runnable existing-project samples (Chinese) |
 | [Agent compatibility](docs/COMPATIBILITY.md) | Codex, OpenCode, and Claude Code validation status (Chinese) |
 | [Security policy](SECURITY.md) | Private vulnerability reporting and supply-chain guidance |
+| [Repository safeguards](docs/MAINTENANCE.md) | Branch rules, required checks, release approvals (Chinese) |
 | [Contributing guide](CONTRIBUTING.md) | Emoji and Chinese Conventional Commits (Chinese) |
 | [Release guide](docs/RELEASING.md) | Versioning and release process (Chinese) |
 | [Changelog](CHANGELOG.md) | Released versions and unreleased changes (Chinese) |

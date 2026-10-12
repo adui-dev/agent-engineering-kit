@@ -4,6 +4,8 @@
 
 ## 未发布（Unreleased）
 
+- ✅ 将 CI 扩展至 Ubuntu/Python 3.10、3.13 与 Windows/Python 3.13；发布前验证也包括初始化 Smoke Test。
+
 - 🔧 支持按 Codex、OpenCode、Claude Code 选择 Skills 目标目录，并补充目录隔离、符号链接和兼容路径的回归测试。
 - 📖 明确官方目录兼容与真实客户端实测的区别，保留尚未完成的 E2E 验收状态。
 

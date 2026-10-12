@@ -37,6 +37,10 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 ## GitHub Actions
 
+质量检查覆盖 Ubuntu 的 Python 3.10、3.13，以及 Windows 的 Python 3.13（均由固定 SHA 的官方 `actions/setup-python` 配置）。文档校验、单元测试和示例回归测试在三个组合中运行；Bash 安装 Smoke Test 仅在 Ubuntu 中运行。Windows 符号链接创建可能受权限限制，相关测试会按预期跳过，不能误报为平台已通过全部符号链接测试。
+
+检查结果请以 GitHub Actions 的三个矩阵作业结论为准。
+
 [质量检查工作流](../.github/workflows/quality.yml) 在 `main` 推送、针对 `main` 的 PR 和手动启动时运行。只有 `contents: read` 权限。
 
 如需通过强制质量检查才能合并，需要由仓库管理员在 Branch Ruleset 中配置必需检查。

@@ -36,7 +36,7 @@
 4. 如果 Tag 已存在但尚无 Release，则停止，要求人工核对。
 5. 使用当次 `main` Commit 创建对应 Tag 与正式 Release，不发布为预发布或草稿。
 
-**维护权限提示：** 发布由维护者明确发起。建议在 GitHub Settings → Rules → Rulesets 中配置 `main` 分支保护、必需的质量检查和 PR 审批。这项仓库设置需要管理员在 GitHub 中启用；仅增加文档并不会自动配置保护规则。GitHub 会自动生成源码 ZIP/TAR 快照。
+**维护权限提示：** 发布由维护者明确发起。建议根据 [仓库维护设置](MAINTENANCE.md) 在 GitHub 配置 `main` 分支保护、必需的质量检查和 PR 审批。这项仓库设置需要管理员在 GitHub 中启用；仅增加文档并不会自动配置保护规则。GitHub 会自动生成源码 ZIP/TAR 快照。
 
 ## 发布后核对
 
