@@ -27,3 +27,6 @@ chore(repo): 🔧 更新仓库配置
 项目已收录 GitHub awesome-copilot 的 [git-commit](.agents/skills/git-commit/SKILL.md) Skill。上游采用 MIT，许可及署名保留于 [THIRD_PARTY_LICENSE.md](.agents/skills/git-commit/THIRD_PARTY_LICENSE.md)。
 
 Skill 的标准流程（审查 diff → 按逻辑暂存 → 选择类型与范围 → 提交）保持不变。**本仓库的中文和 Emoji 要求由本文件及 AGENTS.md 提供，并覆盖该 Skill 默认的英文描述示例。**
+## conventional-commit Skill
+
+项目同时收录 [conventional-commit](.agents/skills/conventional-commit/SKILL.md)，用于规范提交消息。两项 Skill 的通用英文示例仅供参考：**本仓库统一采用 `type(scope): emoji 中文描述`**。无论 Skills 如何描述执行流程，实际 Git 提交和推送均需要获得用户授权。

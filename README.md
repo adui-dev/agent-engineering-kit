@@ -11,7 +11,8 @@
 - 🏗️ ADR：重要架构决策的可追溯记录
 - ✅ Documentation Validation：可逐步落地的文档与链接检查
 - 🔄 需求、设计、实现、测试与文档同步闭环
-- 📝 git-commit Skill + Emoji 与中文 Conventional Commits 规范
+- 📝 git-commit、conventional-commit + Emoji 与中文 Conventional Commits 规范
+- 🔗 GitHub Issues、PR 自动化和 GitHub Actions 安全与效率 Skills
 
 ## 🚀 快速使用
 
@@ -26,12 +27,26 @@
 AGENTS.md
 CONTRIBUTING.md
 README.md
+docs/
+  SKILLS.md
 prompts/
   project-initialization.zh-CN.md
-.agents/skills/git-commit/
-  SKILL.md
-  THIRD_PARTY_LICENSE.md
+.agents/skills/
+  git-commit/
+  github-issues/
+  conventional-commit/
+  create-github-issues-feature-from-implementation-plan/
+  create-github-pull-request-from-specification/
+  github-actions-hardening/
+  github-actions-efficiency/
+  create-github-action-workflow-specification/
 ```
+
+## 🧩 Skills 一览
+
+已收录 8 项项目级 Skills（含既有的 git-commit）。请查看 [Skills 索引](docs/SKILLS.md)，包含功能说明、上游版本、兼容性提示及使用约束。
+
+注意：Skills 仅随仓库分发，能否在目标 AI 编程工具中自动发现，取决于该工具对 `.agents/skills` 的支持；GitHub 操作也需要相应连接、凭据和明确授权。
 
 ## 🛠️ 开发与提交
 
