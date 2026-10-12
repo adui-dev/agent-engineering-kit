@@ -1,6 +1,22 @@
 # 🛡️ GitHub 仓库保护与维护设置
 
-本文件记录在 GitHub 网站中由仓库管理员**手动启用**的设置。仓库中新增 CI 文件并不自动开启分支保护。
+本文件说明由仓库管理员在 GitHub 网站配置的分支保护。代码和 CI 文件**不会自动启用 Ruleset**。本仓库的 `Protect main` 已启用；每次调整规则后都应重新确认实际配置。
+
+## 当前已核实的保护规则（2026-10-12）
+
+通过 [GitHub Ruleset #24911726](https://github.com/adui-dev/agent-engineering-kit/rules/24911726) 的配置核对：
+
+| 配置 | 已核实状态 |
+| --- | --- |
+| Ruleset / 分支 | `Protect main` / 默认分支 `main` |
+| 状态 | `Active` |
+| 禁止删除 / 强制推送 | 已开启 |
+| 必须通过 PR | 已开启，普通 PR 审批人数为 `0` |
+| 三项必需 CI | Ubuntu Python 3.10、Ubuntu Python 3.13、Windows Python 3.13 |
+| Bypass | 无绕过成员 |
+| 分支必须同步最新 main | 未开启（可在无冲突时合并） |
+
+**范围说明：** 规则集已生效不等于已经通过真实 PR 的合并验收。以下步骤用于验证端到端的保护流程。
 
 ## 1. 保护主分支
 
@@ -45,4 +61,17 @@
 - [ ] 发布工作流不会在普通 Push 中自行运行。
 - [ ] 如需发布审批，发布环境限制已通过一次安全测试。
 
-**现状声明：** 自动化工具能够创建和验证工作流，但本仓库的 Rulesets 与 Environment 审批等管理员设置必须在 GitHub 侧另行确认，不将这份文档视为已启用分支保护的证据。
+## 6. 小型 PR 的真实验收流程
+
+在功能或文档分支中提交**有实际用途的最小变更**，通过 Pull Request 合并至 `main`，不再直接推送受保护分支。
+
+1. 基于当前 `main` 创建 `docs/…` 或 `feat/…` 分支，并在分支中提交修改。
+2. 创建非 Draft PR，Base 指向 `main`，填写变更内容、验证范围和风险。
+3. 在 PR 的 Checks 中核对三项精确名称：`✅ 质量检查 (ubuntu-latest, Python 3.10)`、`✅ 质量检查 (ubuntu-latest, Python 3.13)`、`✅ 质量检查 (windows-latest, Python 3.13)`。
+4. 三项均完成并通过之前，**不要尝试绕过保护规则合并**；若结果失败，应修复分支后重新等待 CI。
+5. CI 成功后由维护者通过正常 Merge/Squash 按钮合并，检查 PR 的 `merged` 状态和 `main` 新 Commit。
+6. 合并后检查主分支质量工作流，记录 PR URL、实际检查结果、Merge SHA。合并不会自动发布 Git Tag 或 Release。
+
+不要通过试验性强制推送/删除 `main` 来验证保护。遇到权限错误应停止并明确报告，不要添加机器人 Bypass 绕过规则。
+
+**现状说明：** 已通过 GitHub 配置核对确认本仓库的 Ruleset 为 Active、三项必需检查已设置。PR 合并的实际成功与否应以 GitHub 中的真实 PR 和 CI 结果为准；Release 环境审批功能如未配置，不应宣称已启用。
