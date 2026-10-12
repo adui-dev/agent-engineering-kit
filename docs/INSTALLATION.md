@@ -52,6 +52,16 @@ python scripts/init.py --target ..\\my-project --lang en --agent claude-code --s
 
 该参数只调整 Skills 目录，Prompt 仍保存到 `.agents/prompts/project-initialization.md`，需要明确提示 Agent 阅读。安装路径符合文档规范不等于实测客户端已完成加载。
 
+## 安装后只读校验
+
+安装成功后，可在工具包根目录运行：
+
+```powershell
+python scripts/verify_installation.py --target ..\my-project --lang en --agent claude-code --skill git-commit --json
+```
+
+必须使用**与安装时相同**的 `--lang`、`--agent` 和 `--skill` 参数。检查只读取已安装文件并比对内容哈希，不修改文件；成功**不表示** Agent 已发现或执行 Skill。实际客户端检查见 [端到端验收](AGENT_ACCEPTANCE.md)。
+
 ## 安装结果
 
 ```text

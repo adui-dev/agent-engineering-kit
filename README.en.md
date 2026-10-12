@@ -58,7 +58,7 @@ python scripts/init.py --target ../my-project --lang en --skill git-commit
 python scripts/init.py --target ../my-project --lang en --skill git-commit --apply
 ```
 
-Use `--agent codex`, `--agent opencode`, or `--agent claude-code` to select the documented Skills layout (Claude Code uses `.claude/skills/`). The CLI **does not generate project-specific requirements, run third-party Skills, or overwrite existing files**. Cross-platform installation checks are available with `python scripts/smoke_init.py` (Windows/Linux/macOS). See the [installation guide](docs/INSTALLATION.md) and [runnable examples](docs/EXAMPLES.md) (documentation currently in Chinese).
+Use `--agent codex`, `--agent opencode`, or `--agent claude-code` to select the documented Skills layout (Claude Code uses `.claude/skills/`). The CLI **does not generate project-specific requirements, run third-party Skills, or overwrite existing files**. Cross-platform installation checks are available with `python scripts/smoke_init.py` (Windows/Linux/macOS), plus a [read-only installation integrity check](scripts/verify_installation.py). See the [installation guide](docs/INSTALLATION.md) and [runnable examples](docs/EXAMPLES.md) (documentation currently in Chinese).
 
 ## 🧭 Eight core engineering assets
 
@@ -109,6 +109,7 @@ Skills are stored under `.agents/skills/`. **Automatic discovery depends on your
 | [CLI installation](docs/INSTALLATION.md) | Dry-run, languages, Skills, and collision-safe copying (Chinese) |
 | [Examples and acceptance](docs/EXAMPLES.md) | Greenfield and runnable existing-project samples (Chinese) |
 | [Agent compatibility](docs/COMPATIBILITY.md) | Codex, OpenCode, and Claude Code validation status (Chinese) |
+| [Real-agent acceptance](docs/AGENT_ACCEPTANCE.md) | Client discovery, Skill invocation and initialization checklist (Chinese) |
 | [Security policy](SECURITY.md) | Private vulnerability reporting and supply-chain guidance |
 | [Repository safeguards](docs/MAINTENANCE.md) | Branch rules, required checks, release approvals (Chinese) |
 | [Contributing guide](CONTRIBUTING.md) | Emoji and Chinese Conventional Commits (Chinese) |

@@ -36,4 +36,4 @@ Python Smoke Test 跨平台运行真实 CLI 子进程，在临时目录中验证
 - [ ] 执行实际测试并报告结果，不能把建议当成运行成功。
 - [ ] 不覆盖现有工作，不强制提交或发布。
 
-建议将多工具环境的结果记录在 [兼容性矩阵](COMPATIBILITY.md)。未进行实测时保留“待验证”状态。
+三款工具的实测步骤见 [Agent 端到端验收](AGENT_ACCEPTANCE.md)，只读安装核验见 [verify_installation.py](../scripts/verify_installation.py)。将脱敏证据结论写入 [兼容性矩阵](COMPATIBILITY.md)；未实测时保留“待验证”状态。

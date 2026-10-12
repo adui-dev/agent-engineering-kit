@@ -58,7 +58,7 @@ python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit
 python scripts/init.py --target ../my-project --lang zh-CN --skill git-commit --apply
 ```
 
-可以加上 `--agent codex`、`--agent opencode` 或 `--agent claude-code`，选择适配的 Skills 目录（Claude Code 使用 `.claude/skills/`）。脚本只负责复制选定的 Prompt 与 Skills，**不自动生成项目文档、执行 Skill 或覆盖已有文件**。本仓库还提供 Windows/Linux/macOS 均可执行的 `python scripts/smoke_init.py` 安装验收。详见 [安装使用说明](docs/INSTALLATION.md)、[可运行示例与验收](docs/EXAMPLES.md)。
+可以加上 `--agent codex`、`--agent opencode` 或 `--agent claude-code`，选择适配的 Skills 目录（Claude Code 使用 `.claude/skills/`）。脚本只负责复制选定的 Prompt 与 Skills，**不自动生成项目文档、执行 Skill 或覆盖已有文件**。本仓库还提供 Windows/Linux/macOS 均可执行的 `python scripts/smoke_init.py` 安装验收及 [只读文件完整性校验](scripts/verify_installation.py)。详见 [安装使用说明](docs/INSTALLATION.md)、[可运行示例与验收](docs/EXAMPLES.md)。
 
 ## 🧭 八大核心工程资产
 
@@ -109,6 +109,7 @@ Skills 存放在 `.agents/skills/`。**能否自动发现由所用 AI 编程工�
 | [CLI 安装说明](docs/INSTALLATION.md) | 安全预览、选择语言与 Skills、拒绝覆盖 |
 | [示例与验收](docs/EXAMPLES.md) | 空仓库与已有 Python 项目示例、自动验证 |
 | [工具兼容性](docs/COMPATIBILITY.md) | Codex、OpenCode、Claude Code 的待验证项 |
+| [端到端验收](docs/AGENT_ACCEPTANCE.md) | 客户端发现、Skill 调用和真实初始化验收 |
 | [安全政策](SECURITY.md) | 私密漏洞报告和供应链风险说明 |
 | [仓库维护设置](docs/MAINTENANCE.md) | 主分支保护、必需 CI 与发布审批操作 |
 | [贡献指南](CONTRIBUTING.md) | 中文、Emoji 和 Conventional Commits 规范 |

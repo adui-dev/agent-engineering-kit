@@ -2,11 +2,15 @@
 
 当前统一的初始化 Prompt 由普通 Markdown 文件提供；CLI 负责安全复制 Prompt 和选定 Skills，**不代表任何工具已完成端到端 Agent 初始化测试**。
 
-| 工具 | Prompt 阅读 | `.agents/skills/` 自动发现 | 实际端到端初始化 |
-| --- | --- | --- | --- |
-| Codex | 需通过对应工作区/提示词入口使用 | `.agents/skills/`（文档适配，未实测） | 待验证 |
-| OpenCode | 需通过对应工作区/提示词入口使用 | `.agents/skills/`（官方文档支持，未实测） | 待验证 |
-| Claude Code | 需通过对应工作区/提示词入口使用 | `.claude/skills/`（官方文档支持，未实测） | 待验证 |
+| 工具 | Skills 文档目录 | 文件安装与完整性校验 | 客户端发现/调用 | 真实项目初始化 |
+| --- | --- | --- | --- | --- |
+| Codex | `.agents/skills/` | CI 已验证文件安装 | 待客户端实测 | 待客户端实测 |
+| OpenCode | `.agents/skills/` | CI 已验证文件安装 | 待客户端实测 | 待客户端实测 |
+| Claude Code | `.claude/skills/` | CI 已验证文件安装 | 待客户端实测 | 待客户端实测 |
+
+## 分层验收
+
+按 [真实 Agent 端到端验收](AGENT_ACCEPTANCE.md) 中的 L1–L5 步骤，先用 [只读完整性检查](../scripts/verify_installation.py) 核对安装文件，再在真实客户端测试 Skill 的自动发现、原生调用及项目初始化。直接读取 `SKILL.md` 不能单独证明客户端的技能发现成功。
 
 ## 建议实测方法
 
@@ -24,4 +28,4 @@
 - [Claude Code：Skills](https://code.claude.com/docs/en/skills) 使用项目级 `.claude/skills/<name>/SKILL.md`。
 - [Codex：Agent Skills](https://developers.openai.com/codex/skills) 请按当前官方版本核对发现目录及加载行为。
 
-CLI 的自动化测试已验证文件被复制到对应路径；**尚未通过各客户端真实启动、Skill 发现和任务执行来验证端到端兼容性**。
+CLI 的自动化测试已验证文件安装路径，独立完整性校验可比较文件内容哈希；**尚未通过真实客户端启动、Skill 发现与任务执行来验证端到端兼容性**。

@@ -31,6 +31,10 @@ Linux 环境可以用 `python3` 替代 `python`。校验脚本支持 `--root`，
 
 [中文 README](../README.md) 为 GitHub 默认入口，[English README](../README.en.md) 提供英文介绍。两份 README 应互相链接，并保证版本、功能范围和使用说明一致。校验脚本检查英文 README 是否存在、版本标识及相对链接；**内容的语义对齐仍需人工审查**。完整项目初始化 Prompt 同时维护 [中文](../prompts/project-initialization.zh-CN.md) 和 [英文](../prompts/project-initialization.en.md) 两个版本。校验会核对两版版本号与主章节、八类资产对应的子章节；**自动结构校验不能代替翻译语义审查**。
 
+## 安装完整性检查与 Agent 验收
+
+[verify_installation.py](../scripts/verify_installation.py) 只读比较已安装 Prompt、Skill、许可证和引用资料的内容哈希；[Agent 端到端验收](AGENT_ACCEPTANCE.md) 才能确认实际客户端发现/调用和初始化行为。自动质量检查不应冒充 Agent 客户端实测。
+
 ## 安全初始化与使用验收
 
 安装命令和覆盖防护见 [安装说明](INSTALLATION.md)；空项目、可执行的既有代码示例及验收边界见 [示例与验收](EXAMPLES.md)。自动脚本仅验证复制/现有项目测试，不能宣称已经实际运行 AI Agent。

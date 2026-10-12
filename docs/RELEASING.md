@@ -21,8 +21,9 @@
    python -m unittest discover -s tests -v
    ```
 
-5. 审核变更并确认 GitHub Actions 质量检查通过，再由维护者在 `main` 上手动运行发布工作流。
-6. 发布需要维护者明确授权；不得强制覆盖已有 Tag。
+5. 审核变更并确认 GitHub Actions 质量检查通过；按照 [真实客户端验收](AGENT_ACCEPTANCE.md) 核对宣称已验证的兼容性。未实测项目不得标注为通过。
+6. 由维护者在 `main` 上手动运行发布工作流。
+7. 发布需要维护者明确授权；不得强制覆盖已有 Tag。
 
 ## 手动发布
 

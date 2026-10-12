@@ -4,6 +4,9 @@
 
 ## 未发布（Unreleased）
 
+- 🔎 增加只读安装完整性校验，检查 Prompt/Skills 内容哈希、许可与引用资料，并纳入跨平台 Smoke Test。
+- 🧪 增加 Codex、OpenCode、Claude Code 的 L1–L5 分层验收操作指南；尚未执行的客户端测试继续标记为待验证。
+
 - 🛡️ 安装 CLI 在实际写入前重新校验路径、源文件和目标冲突，补充路径越界、符号链接变化、写入失败回滚等测试。
 - 🧪 新增跨平台 Python 安装 Smoke Test，在 Windows 与 Ubuntu CI 中运行真实 CLI 子进程并校验已有项目代码不变。
 

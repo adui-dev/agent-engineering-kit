@@ -6,6 +6,7 @@ Uses temporary directories only. This does not launch or validate an AI agent.
 
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import subprocess
@@ -15,6 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTALLER = ROOT / "scripts" / "init.py"
+VERIFIER = ROOT / "scripts" / "verify_installation.py"
 
 
 def run_cli(*args: str, expected: int = 0) -> str:
@@ -37,6 +39,26 @@ def run_cli(*args: str, expected: int = 0) -> str:
             f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
         )
     return result.stdout + result.stderr
+
+
+def verify_files(target: Path, *, language: str = "zh-CN",
+                 agent: str = "generic", skills: tuple[str, ...] = ()) -> None:
+    args = [
+        sys.executable, str(VERIFIER), "--target", str(target),
+        "--lang", language, "--agent", agent, "--json",
+    ]
+    for name in skills:
+        args += ["--skill", name]
+    process = subprocess.run(
+        args, cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
+        errors="replace", check=False,
+    )
+    if process.returncode != 0:
+        raise AssertionError("Installation verification failed:\n"
+                             + process.stdout + process.stderr)
+    result = json.loads(process.stdout)
+    if result["scope"] != "file-integrity-only" or not result["ok"]:
+        raise AssertionError("Unexpected verification result: " + str(result))
 
 
 def assert_copied(source: Path, destination: Path) -> None:
@@ -71,6 +93,7 @@ def main() -> int:
             ROOT / ".agents/skills/git-commit/THIRD_PARTY_LICENSE.md",
             fresh / ".agents/skills/git-commit/THIRD_PARTY_LICENSE.md",
         )
+        verify_files(fresh, language="en", skills=("git-commit",))
 
         # Claude Code: real copy of a Skill with reference resources.
         claude = temp / "claude-project"
@@ -93,6 +116,8 @@ def main() -> int:
         )
         if (claude / ".agents/skills").exists():
             raise AssertionError("Claude installation wrote the wrong Skills directory")
+        verify_files(claude, language="zh-CN", agent="claude-code",
+                     skills=("github-issues",))
 
         # Codex and OpenCode: paths and actual copies, not Agent execution.
         for agent in ("codex", "opencode"):
@@ -106,6 +131,7 @@ def main() -> int:
                 ROOT / ".agents/skills/git-commit/SKILL.md",
                 target / ".agents/skills/git-commit/SKILL.md",
             )
+            verify_files(target, agent=agent, skills=("git-commit",))
 
         # Existing project: unchanged application behavior and failure-on-conflict.
         existing = temp / "existing-python"
@@ -118,6 +144,7 @@ def main() -> int:
         )
         if (existing / "src/app.py").read_bytes() != original:
             raise AssertionError("Existing application source was changed")
+        verify_files(existing)
         subprocess.run(
             [sys.executable, "-m", "unittest", "discover", "-s", str(existing / "tests"), "-v"],
             check=True, cwd=existing,
