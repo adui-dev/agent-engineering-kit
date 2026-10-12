@@ -43,30 +43,31 @@ def audit_installation(
     root = target.resolve()
     for source, dest in plan:
         relative = dest.relative_to(target)
+        display = relative.as_posix()
         current = dest
         unsafe = False
         while current != target:
             if current.is_symlink():
-                report["issues"].append(f"包含符号链接：{relative}")
+                report["issues"].append(f"包含符号链接：{display}")
                 unsafe = True
                 break
             current = current.parent
         if unsafe or not dest.resolve().is_relative_to(root):
             if not unsafe:
-                report["issues"].append(f"安装路径超出目标：{relative}")
+                report["issues"].append(f"安装路径超出目标：{display}")
             continue
         if not dest.is_file():
-            report["issues"].append(f"缺少安装文件：{relative}")
+            report["issues"].append(f"缺少安装文件：{display}")
             continue
         try:
             expected = hashlib.sha256(source.read_bytes()).digest()
             observed = hashlib.sha256(dest.read_bytes()).digest()
         except OSError as exc:
-            report["issues"].append(f"读取文件失败：{relative}：{exc}")
+            report["issues"].append(f"读取文件失败：{display}：{exc}")
             continue
         report["checked_files"] += 1
         if expected != observed:
-            report["issues"].append(f"文件与来源不一致：{relative}")
+            report["issues"].append(f"文件与来源不一致：{display}")
 
     report["ok"] = not report["issues"]
     return report
