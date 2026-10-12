@@ -41,7 +41,11 @@ Skill 的标准流程（审查 diff → 按逻辑暂存 → 选择类型与范�
 
 ## 贡献流程与示例检查
 
-提交修改前应阅读 [安全政策](SECURITY.md)。涉及初始化 CLI、Skills 或多工具适配时，请提供可复现的输入和验证结果，并参考 [真实示例与验收](docs/EXAMPLES.md)。建议新功能通过 PR 评审后合并到 `main`，不要将未执行的测试写成成功。
+提交修改前应阅读 [安全政策](SECURITY.md)。涉及初始化 CLI、Skills 或多工具适配时，请提供可复现的输入和验证结果，并参考 [真实示例与验收](docs/EXAMPLES.md)。
+
+`main` 已启用 [Protect main Ruleset](https://github.com/adui-dev/agent-engineering-kit/rules/24911726)，后续**所有代码和文档变更均从开发分支通过 Pull Request 合并到 `main`**。必要的三个检查是 Ubuntu Python 3.10、Ubuntu Python 3.13、Windows Python 3.13。只有检查全部成功且 GitHub 显示可合并后，才能通过正常 Merge/Squash 流程合并。不要直接推送 `main`、配置 Bypass 或把未执行的测试写成成功。
+
+[首次测试 PR #1](https://github.com/adui-dev/agent-engineering-kit/pull/1) 已验证完整的分支、CI、合并流程。后续版本准备和验收见 [V1.2 发布前清单](docs/V1.2_ACCEPTANCE.md)。
 
 ## 正式发布
 

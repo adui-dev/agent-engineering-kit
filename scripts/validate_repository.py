@@ -24,6 +24,7 @@ REQUIRED_FILES = (
     "docs/EXAMPLES.md",
     "docs/COMPATIBILITY.md",
     "docs/MAINTENANCE.md",
+    "docs/V1.2_ACCEPTANCE.md",
     "scripts/init.py",
     "scripts/smoke_init.sh",
     "scripts/smoke_init.py",

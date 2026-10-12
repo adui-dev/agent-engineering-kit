@@ -15,6 +15,7 @@
 - [版本与更新日志](CHANGELOG.md)
 - [质量检查规范](docs/QUALITY.md)
 - [版本发布规范](docs/RELEASING.md)
+- [V1.2 发布前验收清单](docs/V1.2_ACCEPTANCE.md)
 - [CLI 安全安装](docs/INSTALLATION.md)
 - [示例与验收](docs/EXAMPLES.md)
 - [真实 Agent 端到端验收](docs/AGENT_ACCEPTANCE.md)
@@ -38,7 +39,8 @@
 12. 创建 Release 前核对版本、发布说明、质量检查和授权；禁止覆盖历史 Tag，发布规范详见 [docs/RELEASING.md](docs/RELEASING.md)。
 13. README.md 与 README.en.md 分别提供中文和英文说明；中文 Prompt `prompts/project-initialization.zh-CN.md` 与英文 Prompt `prompts/project-initialization.en.md` 必须章节完整、语义一致、版本同步。翻译仅改变语言，不得放宽权限、安全、测试和交付要求。
 14. CLI 安装工具默认 dry-run，不覆盖已有项目文件。Release 只能在获授权后手动启动，日常 Push 不得自动发布。
-15. 修改项目文档或 Skills 后，运行 `python scripts/validate_repository.py` 和 `python -m unittest discover -s tests -v`；检查的静态结果不能替代真实运行测试或安全审计。
+15. `main` 已启用强制 PR 与三项必需质量检查，后续变更必须在开发分支提交并经 PR 正常合并，不得直接推送 `main` 或绕过规则。
+16. 修改项目文档或 Skills 后，运行 `python scripts/validate_repository.py` 和 `python -m unittest discover -s tests -v`；检查的静态结果不能替代真实运行测试或安全审计。
 
 ## 交付要求
 
