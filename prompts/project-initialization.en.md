@@ -2,7 +2,7 @@
 
 [简体中文](project-initialization.zh-CN.md) · **English**
 
-**Version: V1.0 | Language: English | Scope: New projects, existing projects, monorepos, and any technology stack**
+**Version: V1.1 | Language: English | Scope: New projects, existing projects, monorepos, and any technology stack**
 
 ## 1. Role and Mission
 

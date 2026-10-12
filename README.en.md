@@ -10,7 +10,7 @@
 
 Agent Engineering Kit is a **technology-agnostic toolkit for sustainable AI-assisted development**. It provides a reusable project-initialization prompt, task-focused Skills, collaboration rules, and lightweight quality checks for greenfield repositories, existing codebases, and monorepos.
 
-> **Current version: V1.0** · [Stable release](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0) · [Changelog](CHANGELOG.md)
+> **Current version: V1.1** · [Stable release](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.1.0) · [Changelog](CHANGELOG.md)
 >
 > This is an **engineering toolkit**, not an application framework. Copying a prompt alone does not create a runnable application.
 
@@ -34,7 +34,7 @@ Open the project you want to initialize in Codex, OpenCode, Claude Code, or anot
 
 **2. Copy the initialization prompt**
 
-Choose **[📋 Universal Project Initialization Prompt V1.0 (English)](prompts/project-initialization.en.md)** or the **[Simplified Chinese version](prompts/project-initialization.zh-CN.md)**. Send the complete prompt in your preferred language to your coding agent. Both versions cover the same 16 sections, engineering assets, and execution constraints.
+Choose **[📋 Universal Project Initialization Prompt V1.1 (English)](prompts/project-initialization.en.md)** or the **[Simplified Chinese version](prompts/project-initialization.zh-CN.md)**. Send the complete prompt in your preferred language to your coding agent. Both versions cover the same 16 sections, engineering assets, and execution constraints.
 
 **3. Review the actual deliverables**
 
@@ -42,7 +42,7 @@ Your agent should inspect the repository before creating or updating the necessa
 
 You can append the following instruction:
 
-> Follow Project Initialization Prompt V1.0. Inspect the current repository and existing rules first; make only necessary changes; distinguish implemented features from planned or unconfirmed work; create the required files and run applicable checks instead of producing generic templates.
+> Follow Project Initialization Prompt V1.1. Inspect the current repository and existing rules first; make only necessary changes; distinguish implemented features from planned or unconfirmed work; create the required files and run applicable checks instead of producing generic templates.
 
 **Important:** The coding tool needs the necessary filesystem and execution permissions. If an operation cannot be performed, it must be reported rather than presented as completed. The initialized engineering assets belong in the **target repository**.
 
@@ -113,8 +113,8 @@ Checks cover version consistency, relative Markdown links, basic Skill metadata,
 
 ## 📦 Releases, contributions, and license
 
-- **Active development branch:** `main`. **First stable release:** [V1.0 / v1.0.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0).
-- **Version distinction:** `main` continues to evolve, while the `v1.0.0` source snapshot remains unchanged.
+- **Active development branch:** `main`. **Latest stable release:** [V1.1 / v1.1.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.1.0). **First release:** [V1.0 / v1.0.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0).
+- **Version distinction:** `main` continues to evolve, while the `v1.1.0` and `v1.0.0` source snapshots remain unchanged.
 - **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md). Commit messages follow `type(scope): emoji 中文描述`.
 - **License:** [MIT License](LICENSE). Third-party Skills retain their respective copyright and license notices.
 

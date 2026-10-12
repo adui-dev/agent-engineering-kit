@@ -2,7 +2,7 @@
 
 ## 版本管理
 
-[VERSION](../VERSION) 为当前版本的唯一来源，首个正式版本为 **V1.0**，记录见 [CHANGELOG](../CHANGELOG.md)。
+[VERSION](../VERSION) 为当前版本的唯一来源，首个正式版本为 **V1.0**，当前版本为 **V1.1**；版本记录见 [CHANGELOG](../CHANGELOG.md)。
 
 ## 运行方式
 

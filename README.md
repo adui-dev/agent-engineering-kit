@@ -10,7 +10,7 @@
 
 Agent Engineering Kit 是一套**技术栈无关、面向长期开发**的 AI Agent 工程化工具包。提供通用项目初始化 Prompt、可复用 Skills、协作约定和基础质量检查，适用于新建项目、已有代码仓库及 Monorepo。
 
-> **当前版本：V1.0** · [正式发布](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0) · [更新日志](CHANGELOG.md)
+> **当前版本：V1.1** · [正式发布](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.1.0) · [更新日志](CHANGELOG.md)
 >
 > 这是供其他项目使用的**工程工具包**，不是业务应用框架。不会仅靠复制文档就自动生成可运行的业务系统。
 
@@ -34,7 +34,7 @@ Agent Engineering Kit 是一套**技术栈无关、面向长期开发**的 AI Ag
 
 **2. 复制初始化指令**
 
-选择并打开 **[📋 中文初始化 Prompt V1.0](prompts/project-initialization.zh-CN.md)** 或 **[English Prompt V1.0](prompts/project-initialization.en.md)**，将对应语言的完整指令发送给 AI Agent。两版均覆盖相同的 16 个章节和核心工程约束。
+选择并打开 **[📋 中文初始化 Prompt V1.1](prompts/project-initialization.zh-CN.md)** 或 **[English Prompt V1.1](prompts/project-initialization.en.md)**，将对应语言的完整指令发送给 AI Agent。两版均覆盖相同的 16 个章节和核心工程约束。
 
 **3. 审核实际交付**
 
@@ -42,7 +42,7 @@ Agent 应先检查目标仓库，再根据真实需求创建或补全必要文�
 
 你可以附加这段任务要求：
 
-> 请按上述项目初始化 Prompt V1.0 执行。先分析当前仓库及已有规范，保持最小必要改动，区分已实现、规划中与待确认内容；实际创建所需文件并验证，不要只输出通用模板。
+> 请按上述项目初始化 Prompt V1.1 执行。先分析当前仓库及已有规范，保持最小必要改动，区分已实现、规划中与待确认内容；实际创建所需文件并验证，不要只输出通用模板。
 
 **重要：** 目标工具必须具备相应的文件读写和执行权限；不能执行时应如实说明。完整流程由目标项目自行维护，不要求将本仓库整体复制进去。
 
@@ -113,8 +113,8 @@ python -m unittest discover -s tests -v
 
 ## 📦 版本、贡献与许可证
 
-- **当前开发分支**：`main`；**首个正式发布**：[V1.0 / v1.0.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0)。
-- **注意版本差异**：`main` 会持续更新，`v1.0.0` 对应的 Release 源码快照不会随之改变。
+- **当前开发分支**：`main`；**最新正式发布**：[V1.1 / v1.1.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.1.0)；[首个正式版本 V1.0](https://github.com/adui-dev/agent-engineering-kit/releases/tag/v1.0.0)。
+- **注意版本差异**：`main` 会持续更新，`v1.1.0` 与 `v1.0.0` 对应的 Release 源码快照不会随之改变。
 - **贡献方式**：请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，提交格式为 `type(scope): emoji 中文描述`。
 - **开源许可**：[MIT License](LICENSE)。第三方 Skills 保留各自的版权和许可声明。
 

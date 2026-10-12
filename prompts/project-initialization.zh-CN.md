@@ -2,7 +2,7 @@
 
 **简体中文** · [English](project-initialization.en.md)
 
-**版本：V1.0｜语言：简体中文｜适用：新项目、已有项目、Monorepo、任意技术栈**
+**版本：V1.1｜语言：简体中文｜适用：新项目、已有项目、Monorepo、任意技术栈**
 
 ## 一、角色与任务定位
 
