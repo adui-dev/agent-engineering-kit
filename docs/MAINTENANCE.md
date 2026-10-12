@@ -16,7 +16,7 @@
 | Bypass | 无绕过成员 |
 | 分支必须同步最新 main | 未开启（可在无冲突时合并） |
 
-**范围说明：** 规则集已生效不等于已经通过真实 PR 的合并验收。以下步骤用于验证端到端的保护流程。
+**合并验收已完成：** [PR #1](https://github.com/adui-dev/agent-engineering-kit/pull/1) 在三个必需检查成功后通过正常 Squash Merge 合并至 `main`（合并 SHA `f6b37ca801705bab8e37b29223e0129950f7c7d1`）。[合并后 CI](https://github.com/adui-dev/agent-engineering-kit/actions/runs/38213891837) 三个平台再次全部通过。
 
 ## 1. 保护主分支
 
@@ -54,11 +54,11 @@
 
 ## 5. 启用后的人工验收
 
-- [ ] `main` 的规则集处于 Active 状态。
-- [ ] GitHub 显示三个必需的质量检查，提交测试 PR 时按预期运行。
+- [x] `main` 的规则集处于 Active 状态。
+- [x] GitHub 显示三个必需的质量检查，提交测试 PR 时按预期运行。
 - [ ] 强制推送和删除分支被拒绝（只需检查规则，不要在正式仓库实际试运行破坏性命令）。
-- [ ] 经过验证，合法贡献流程仍可正常合并。
-- [ ] 发布工作流不会在普通 Push 中自行运行。
+- [x] 经过验证，合法贡献流程仍可正常合并（[PR #1](https://github.com/adui-dev/agent-engineering-kit/pull/1)）。
+- [x] 发布工作流只提供手动触发，测试 PR 合并后未生成新的 Tag 或 Release。
 - [ ] 如需发布审批，发布环境限制已通过一次安全测试。
 
 ## 6. 小型 PR 的真实验收流程
@@ -74,4 +74,4 @@
 
 不要通过试验性强制推送/删除 `main` 来验证保护。遇到权限错误应停止并明确报告，不要添加机器人 Bypass 绕过规则。
 
-**现状说明：** 已通过 GitHub 配置核对确认本仓库的 Ruleset 为 Active、三项必需检查已设置。PR 合并的实际成功与否应以 GitHub 中的真实 PR 和 CI 结果为准；Release 环境审批功能如未配置，不应宣称已启用。
+**现状说明：** Ruleset、三个必需检查和真实 PR 合并已经完成验证。Release 环境审批功能尚未确认启用，不应宣称已配置。V1.2 的完整验收进度见 [发布前清单](V1.2_ACCEPTANCE.md)。
