@@ -1,6 +1,6 @@
 # 🔄 GitHub → CNB 仓库单向同步
 
-> 状态：工作流已配置；首次远端同步是否成功，以 GitHub Actions 运行结果为准。
+> 状态：已配置，首次推送在 2026-10-12 成功（[Actions 运行 #1](https://github.com/adui-dev/agent-engineering-kit/actions/runs/38190262748)）；后续结果以对应运行日志为准。
 
 ## 同步目标
 
@@ -48,6 +48,6 @@ CNB 官方 Git HTTPS 认证采用用户名 `cnb`、密码为访问令牌。**CNB
 - 不使用 `--mirror` 或 `--force`，避免删除或覆盖 CNB 的独立历史。
 - 使用锁定 SHA 的官方 `actions/checkout`，关闭凭据持久化；同步任务无需依赖安装、构建或执行仓库脚本。
 - 更改同步范围、分支策略、令牌名称或认证方式时，同步更新此文档并运行 YAML/脚本语法与安全检查。
-- 本文不表示已经成功访问目标 CNB 仓库或确认目标分支历史。
+- 首次 Actions 运行显示 CNB 推送步骤成功；后续是否与最新 GitHub HEAD 一致，应以对应运行日志和 CNB 实际状态为准。
 
 参考：[CNB Git 地址与认证说明](https://docs.cnb.cool/zh/guide/git-access.html)、[CNB 访问令牌](https://docs.cnb.cool/zh/guide/access-token.html)。

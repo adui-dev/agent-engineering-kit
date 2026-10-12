@@ -39,3 +39,7 @@
 - 更新第三方 Skills 前检查源代码、外部工具权限、依赖引用、上游许可证和版本差异；不要静默覆盖现有二次调整。
 - 项目级说明原则上使用中文，上游 `SKILL.md` 和 `references/` 保持原文，避免篡改授权声明。
 - 通过检查 Skill YAML 元数据、目录名、内部 Markdown 链接与来源声明验证安装，不将“已入库”误写成“已在目标工具激活”。
+
+## 自动检查
+
+使用 `python scripts/validate_repository.py` 校验 Skills 目录、入口 frontmatter、元数据、索引、许可和主入口中的相对链接；参见 [质量检查规范](QUALITY.md)。这只检查文件结构，不表示已在所有 AI Agent 工具中成功加载或执行技能。

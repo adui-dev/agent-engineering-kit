@@ -1,6 +1,6 @@
 # AI Agent 驱动项目工程体系初始化与持续开发总指令
 
-**版本：V2.0｜语言：简体中文｜适用：新项目、已有项目、Monorepo、任意技术栈**
+**版本：V1.0｜语言：简体中文｜适用：新项目、已有项目、Monorepo、任意技术栈**
 
 ## 一、角色与任务定位
 
@@ -163,7 +163,7 @@ project/
 3. **分析影响**：确定文件、接口、数据、安全、回归、测试和文档范围；复杂任务先规划。
 4. **实施**：遵循规范、最小修改、复用代码、处理错误边界和权限，不做无关重构。
 5. **验证**：选择格式、静态、类型、单元、集成、构建、必要 E2E 和文档检查；失败分析后修复重试；无法运行则说明。
-6. **同步**：需求改 REQUIREMENTS，架构改 ARCHITECTURE，详细实现改 SDD，进度改 CONTEXT，重要目录改 CODEBASE_MAP，协作规则改 AGENTS，工作流改 Skills，测试构建改 Harness，重大决策改 ADR，文档规则改 Validation。
+6. **同步**：需求改 REQUIREMENTS，架构改 ARCHITECTURE，详细实现改 SDD，进度改 PROJECT_CONTEXT，重要目录改 CODEBASE_MAP，协作规则改 AGENTS，工作流改 Skills，测试构建改 Harness，重大决策改 ADR，文档规则改 Validation。
 7. **交付**：汇报内容、文件、原因、真实测试结果、影响、文档同步、风险和待确认事项。
 
 ## 十一、多 Agent 与多工具兼容
